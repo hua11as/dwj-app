@@ -7,6 +7,9 @@
     <groupId>com.dwj.app</groupId>
     <artifactId>dwj-app</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>dwj-support-server</module>
+    </modules>
     <packaging>pom</packaging>
 
     <build>
