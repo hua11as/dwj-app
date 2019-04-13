@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>欢迎页</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="${request.contextPath}/statics/css/bootstrap.min.css">
+    <script src="${request.contextPath}/statics/libs/jquery.min.js"></script>
+    <script src="${request.contextPath}/statics/libs/vue.min.js"></script>
+    <script src="${request.contextPath}/statics/libs/router.js"></script>
+    <script src="${request.contextPath}/statics/libs/bootstrap.min.js"></script>
+    <script src="${request.contextPath}/statics/libs/app.js"></script>
+    <script src="${request.contextPath}/statics/plugins/layer/layer.js"></script>
+</head>
+<body>
+<div class="panel panel-default" id="count_">
+    <div class="panel-heading">统计信息</div>
+    <div style="padding: 10px 0 20px 10px;">
+        <!--<span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;会员总数：<span id="vipCount">{{countInfo.vipCount}}</span>人</span>-->
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;累计充值：<span id="rechargeCount">{{countInfo.rechargeCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;累计提现：<span id="withdrawCount">{{countInfo.withdrawCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;累计下注：<span id="inCount">{{countInfo.inCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;累计赔付：<span id="outCount">{{countInfo.outCount}}</span>金豆</span>
+
+        <br/>
+        <br/>
+        <br/>
+
+        <!--<span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;今日新增会员：<span id="tVipCount">{{countInfo.tVipCount}}</span>人</span>-->
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今日充值：<span id="tRechargeCount">{{countInfo.tRechargeCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今日提现：<span id="tWithdrawCount">{{countInfo.tWithdrawCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今日下注：<span id="tInCount">{{countInfo.tInCount}}</span>金豆</span>
+        <span style="width:25%;text-align:left;font-size:20px;font-weight:bold">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;今日赔付：<span id="tOutCount">{{countInfo.tOutCount}}</span>金豆</span>
+
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    var vm = new Vue({
+        el: '#count_',
+        data: {
+            name: 'Vue.js',
+            countInfo:{},
+        },
+// 在 `methods` 对象中定义方法
+        methods: {
+            getCountInfo: function () {
+// 方法内 `this` 指向 vm
+                $.getJSON("sys/count/index?_"+$.now(), function(r){
+                    vm.countInfo = r.countInfo;
+                    console.log("countInfo.........:"+JSON.stringify(vm.countInfo));
+                });
+
+// `event` 是原生 DOM 事件
+            }
+        },
+        created: function(){
+            this.getCountInfo();
+        },
+    });
+
+
+    // 也可以在 JavaScript 代码中调用方法
+//    vm.getCountInfo() // -> 'Hello Vue.js!'
+</script>
+</body>
+</html>

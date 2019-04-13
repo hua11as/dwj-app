@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>开奖视频管理</title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.id" placeholder="视频id">
+			</div>
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.deingerNum" placeholder="播放员编号">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			<a class="btn btn-primary" href="/statics/model/video_model.xlsx"><i class="fa fa-download"></i>&nbsp;下载模板</a>
+			<a class="btn btn-primary" onclick="$('#uploadFile').click()"><i class="fa fa-upload"></i>&nbsp;批量导入</a>
+			<a class="btn btn-primary" @click="refreshPair"><i class="fa fa-refresh"></i>&nbsp;刷新</a>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+		<div hidden>
+			<input type="file" name="file" id="uploadFile" @change="upload">
+		</div>
+    </div>
+     
+   	<div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2 control-label">播放员编号</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.deingerNum" placeholder="播放员编号" required="required"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">播放总时长(秒)(秒)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.totalPlayTimes" placeholder="播放总时长(秒)(秒)" required="required"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">开奖结果</div>
+				<label class="radio-inline">
+					<input type="radio" name="resultSign" value="2" v-model="video.resultSign"/> 庄家胜
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="resultSign" value="1" v-model="video.resultSign"/> 闲家胜
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="resultSign" value="3" v-model="video.resultSign"/> 和
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">庄家牌</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.bankerPoint" placeholder="庄家牌"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">庄家牌颜色(1黑2红3梅4方)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.bankerPointColor" placeholder="庄家牌"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">闲家牌</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.playerPoint" placeholder="闲家牌"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">庄家牌颜色(1黑2红3梅4方)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.playerPointColor" placeholder="闲家牌"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">投注时长(秒)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.orderTimes" placeholder="投注时长(秒)"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">计算时长(秒)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.calOrderTimes" placeholder="计算时长(秒)"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">发牌时长(秒)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.playTimes" placeholder="发牌时长(秒)"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">开奖时长(秒)</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.showResultTimes" placeholder="开奖时长(秒)"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">视频地址</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.linkAdress" placeholder="视频地址"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">备注</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="video.remark" placeholder="备注"/>
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-2 control-label">状态</div>
+				<label class="radio-inline">
+					<input type="radio" name="status" value="0" v-model="video.status"/> 有效
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="status" value="1" v-model="video.status"/> 无效
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/business/video.js?_${.now?long}"></script>
+</body>
+</html>

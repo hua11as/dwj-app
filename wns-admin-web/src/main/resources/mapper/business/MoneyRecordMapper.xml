@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjadmin.dao.MoneyRecordMapper">
+    <resultMap id="BaseResultMap" type="com.lontyu.dwjadmin.entity.MoneyRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="vip_id" jdbcType="INTEGER" property="vipId"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, vip_id, amount, type, remark,status,order_id,create_time,image
+  </sql>
+
+    <select id="selectAmountByType" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+        select ifnull(sum(amount),0) as amount from t_money_record
+        <where>
+            status=1
+            <if test="vipId != null">
+                and vip_Id=#{vipId,jdbcType=INTEGER}
+            </if>
+            <if test="type != null">
+                and type=#{type,jdbcType=INTEGER}
+            </if>
+            <if test="sign != null">
+                and DATE_FORMAT( create_time,'%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')
+            </if>
+            <if test="countDate != null">
+                and DATE_FORMAT( create_time,'%Y-%m-%d') = #{countDate,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <select id="countByDate"  resultType="java.util.Map">
+      SELECT r.`type` ,IFNULL(SUM(r.`amount`),0) amount,DATE_FORMAT( create_time,'%Y-%m-%d') dt
+      FROM t_money_record r
+        where 1=1
+      <if test="minDate != null">
+          and create_time &gt;= #{minDate}
+      </if>
+      <if test="maxDate != null">
+          and create_time &lt; #{maxDate}
+      </if>
+      GROUP BY r.`type`,dt ORDER BY dt DESC
+    </select>
+
+    <select id="statByDate" resultType="java.util.Map">
+        SELECT r.`type` ,IFNULL(SUM(r.`amount`),0) amount
+        FROM t_money_record r
+        where 1=1
+        <if test="statDate != null">
+          and DATE_FORMAT( create_time,'%Y-%m-%d') = #{statDate}
+        </if>
+        GROUP BY r.`type`
+    </select>
+
+    <select id="countAll"  resultType="java.util.Map">
+
+    SELECT r.`type` ,IFNULL(SUM(r.`amount`),0) amount FROM t_money_record r GROUP BY r.`type`
+    </select>
+
+</mapper>

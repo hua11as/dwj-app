@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>投注记录管理</title>
+    <#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <div class="form-group col-sm-1">
+                <input type="text" class="form-control" v-model="q.vipId" @keyup.enter="query" placeholder="用户id">
+            </div>
+            <div class="form-group col-sm-1">
+                <input type="text" class="form-control" v-model="q.nickName" @keyup.enter="query" placeholder="昵称">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" v-model="q.periods" @keyup.enter="query" placeholder="期数">
+            </div>
+            <a class="btn btn-default" @click="query">查询</a>
+            <a class="btn btn-primary" @click="drawRecord"><i class="fa fa-braille"></i>&nbsp;投注记录</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+</div>
+
+<script src="${request.contextPath}/statics/js/modules/business/order.js?_${.now?long}"></script>
+</body>
+</html>

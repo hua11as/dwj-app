@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjwap.dao.MoneyRecordMapper">
+    <resultMap id="BaseResultMap" type="com.lontyu.dwjwap.entity.MoneyRecord">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="vip_id" jdbcType="INTEGER" property="vipId"/>
+        <result column="amount" jdbcType="DECIMAL" property="amount"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="order_id" jdbcType="VARCHAR" property="orderId"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="image" jdbcType="VARCHAR" property="image"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, vip_id, amount, type, remark, create_time,order_Id,status,image
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_money_record
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_money_record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lontyu.dwjwap.entity.MoneyRecord">
+        insert into t_money_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="vipId != null">
+                vip_id,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+            <if test="orderId != null">
+                order_Id,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="vipId != null">
+                #{vipId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjwap.entity.MoneyRecord">
+        update t_money_record
+        <set>
+            <if test="vipId != null">
+                vip_id = #{vipId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DECIMAL},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderId != null">
+                order_Id = #{orderId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <update id="updateByOrderId" parameterType="java.util.Map">
+        update t_money_record
+        set status = #{sign,jdbcType=INTEGER},
+        where order_id=#{orderId,jdbcType=VARCHAR}
+    </update>
+
+    <!-- 分页查询 -->
+    <select id="listPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+        select * from
+        t_money_record
+        <where>
+            <if test="vipId != null">
+                vip_Id=#{vipId,jdbcType=INTEGER}
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER}
+            </if>
+        </where>
+        order by id desc limit #{pageFirst}, #{pageSize}
+    </select>
+
+    <select id="selectVipIdByOrderId" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select vipId from t_money_record  where order_id=#{orderId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAmountByType" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+        select ifnull(sum(amount),0) as amount from t_money_record
+        <where>
+            status=1
+            <if test="vipId != null">
+                and vip_Id=#{vipId,jdbcType=INTEGER}
+            </if>
+            <if test="type != null">
+                and type=#{type,jdbcType=INTEGER}
+            </if>
+            <if test="date != null">
+                and DATE_FORMAT( create_time,'%Y-%m-%d') = DATE_FORMAT(#{date}, '%Y-%m-%d')
+            </if>
+        </where>
+    </select>
+    <select id="selectPageList" parameterType="com.lontyu.dwjwap.dto.req.GetBillDetailsReqVO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from t_money_record
+        where 1=1
+        <include refid="Page_Where"/>
+        order by create_time desc
+        limit #{offset}, #{pageSize}
+    </select>
+    <select id="selectPageCount" parameterType="com.lontyu.dwjwap.dto.req.GetBillDetailsReqVO" resultType="java.lang.Integer">
+        select count(1) from t_money_record
+        where 1=1
+        <include refid="Page_Where"/>
+    </select>
+    <sql id="Page_Where">
+        <if test="vipId != null">
+            and vip_id = #{vipId}
+        </if>
+        <if test="startTime != null">
+            and create_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and create_time &lt; #{endTime}
+        </if>
+        <if test="status != null">
+            and status = #{status}
+        </if>
+        <if test="type != null">
+            and type = #{type}
+        </if>
+    </sql>
+</mapper>

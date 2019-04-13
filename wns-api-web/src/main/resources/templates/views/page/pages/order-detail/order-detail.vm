@@ -1,0 +1,441 @@
+#set($title = "开奖列表")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">重庆时时彩</span></div>
+		<!--<div class="navbar-item index-navbar-income">-->
+		<!--<a href="javascript:;" class="btn btn-primary">充值</a>-->
+		<!--</div>-->
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem">
+
+		<input type="hidden" id="userId" value="${userId}">
+		<input type="hidden" id="drawInssue" value="${drawInssue}">
+
+
+		<div class="order-detail-result-item">
+			<h3>总和</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="0" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="0" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="order-detail-result-item">
+			<h3>第一球</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="1" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="1" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="order-detail-result-item">
+			<h3>第二球</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="2" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="2" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="order-detail-result-item">
+			<h3>第三球</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="3" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="3" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="order-detail-result-item">
+			<h3>第四球</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="4" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="4" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="order-detail-result-item">
+			<h3>第五球</h3>
+			<ul class="m-grids-4">
+				<li class="grids-item" typeVal="5" drawType="1">
+					<div class="grids-txt">
+						<p>大</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="2">
+					<div class="grids-txt">
+						<p>小</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="3">
+					<div class="grids-txt">
+						<p>单</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="4">
+					<div class="grids-txt">
+						<p>双</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="5">
+					<div class="grids-txt">
+						<p>龙</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="6">
+					<div class="grids-txt">
+						<p>虎</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+				<li class="grids-item" typeVal="5" drawType="7">
+					<div class="grids-txt">
+						<p>和</p>
+						<p class="odds">1.66</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+
+	</div>
+	<footer class="m-tabbar tabbar-fixed nav-select">
+		<ul class="m-grids-2">
+			<li class="grids-item">
+				<div class="grids-icon">
+					<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/order-detail/order_6345d96.png"/>
+					<span>我的选择（<span class="select-count">0</span>）</span>
+				</div>
+				<div class="grids-txt"></div>
+			</li>
+			<li class="grids-item">
+				<div class="grids-icon">
+					<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/order-detail/comfirm-order_1e199e7.png"/>
+					<span> 我的订单</span>
+				</div>
+				<div class="grids-txt"></div>
+			</li>
+		</ul>
+	</footer>
+	#parse("../pages/common/_nav.vm")
+	<div class="m-actionsheet order-tab" id="J_ActionSheet">
+		<div class="m-tab demo-small-pitch" data-ydui-tab>
+			<ul class="tab-nav">
+				<li class="tab-nav-item tab-active"><a href="javascript:;">我的选择</a></li>
+				<li class="tab-nav-item"><a href="javascript:;">我的订单</a></li>
+
+			</ul>
+			<div class="tab-panel">
+				<div class="tab-panel-item tab-active">
+					<div class="my-choice">
+						<div class="choice-header">
+							<ul class="m-grids-2">
+								<li class="grids-item">
+									<div class="grids-icon clern-btn-wrap">
+										<span class="clern-btn">全部清除</span>
+									</div>
+									<div class="grids-txt"></div>
+								</li>
+								<li class="grids-item">
+									<div class="grids-icon account-jindou">
+										<span style="color: #d23d3d;margin-right: .2rem">100000</span>金豆
+									</div>
+									<div class="grids-txt"></div>
+								</li>
+							</ul>
+						</div>
+						<div class="choice-list">
+							<article class="m-list list-theme4">
+								<!--<a href="javascript:;" class="list-item">-->
+									<!--<div class="list-img">-->
+										<!--<img src="/static/images/order-detail/icon-del.png" alt="">-->
+										<!--<div class="left-text">-->
+											<!--<p>大 <span>1.66</span></p>-->
+											<!--<p>总和</p>-->
+											<!--<p>重庆时时彩</p>-->
+										<!--</div>-->
+
+									<!--</div>-->
+									<!--<div class="list-mes">-->
+										<!--<div class="list-mes-item">-->
+											<!--<div>-->
+												<!--<p><input type="number"></p>-->
+												<!--<p class="restore-text">预计返还 <span>198</span>金豆</p>-->
+											<!--</div>-->
+										<!--</div>-->
+									<!--</div>-->
+								<!--</a>-->
+
+
+							</article>
+						</div>
+					</div>
+				</div>
+				<div class="tab-panel-item">你没有订单哦！</div>
+
+			</div>
+		</div>
+		<div class="all-pay">
+			<p>全部选项等额竞猜 3 x <input type="number"></p>
+		</div>
+		<a href="javascript:;" class="actionsheet-action btn-block btn-primary" id="add-order">立即竞猜</a>
+		<a href="javascript:;" class="actionsheet-action" id="J_Cancel">取消</a>
+	</div>
+</section>
+
+
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/order-detail/order-detail.vm")
+#end

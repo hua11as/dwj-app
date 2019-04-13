@@ -1,0 +1,385 @@
+{
+    "res": {
+        "page/layouts/main.vm": {
+            "uri": "/page/layouts/main.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "static/js/lib/_ydui.flexible.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/_ydui.flexible_7467917.js",
+            "type": "js"
+        },
+        "static/css/page/demo.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_e931d9a.css",
+            "type": "css"
+        },
+        "static/js/lib/socket.io.min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/socket.io.min_c69d565.js",
+            "type": "js"
+        },
+        "static/js/page/baijiale.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/baijiale_7b2e07f.js",
+            "type": "js"
+        },
+        "page/pages/baijiale/baijiale.vm": {
+            "uri": "/page/pages/baijiale/baijiale.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/bill-list/index.vm": {
+            "uri": "/page/pages/bill-list/index.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/bind/bind.vm": {
+            "uri": "/page/pages/bind/bind.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/bring-up/index.vm": {
+            "uri": "/page/pages/bring-up/index.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/common/_nav.vm": {
+            "uri": "/page/pages/common/_nav.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/common/_script.vm": {
+            "uri": "/page/pages/common/_script.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/err.vm": {
+            "uri": "/page/pages/err.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/home/home.vm": {
+            "uri": "/page/pages/home/home.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/index/index.vm": {
+            "uri": "/page/pages/index/index.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/order-detail/order-detail.vm": {
+            "uri": "/page/pages/order-detail/order-detail.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/order-list/order-list.vm": {
+            "uri": "/page/pages/order-list/order-list.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/order/order.vm": {
+            "uri": "/page/pages/order/order.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/pay-record/detail-bjl.vm": {
+            "uri": "/page/pages/pay-record/detail-bjl.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/pay-record/detail-time.vm": {
+            "uri": "/page/pages/pay-record/detail-time.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/pay-record/pay-record.vm": {
+            "uri": "/page/pages/pay-record/pay-record.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/spread/spread.vm": {
+            "uri": "/page/pages/spread/spread.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/time-list/time-list.vm": {
+            "uri": "/page/pages/time-list/time-list.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/top-up/index.vm": {
+            "uri": "/page/pages/top-up/index.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/trading-record/extract.vm": {
+            "uri": "/page/pages/trading-record/extract.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/trading-record/pay.vm": {
+            "uri": "/page/pages/trading-record/pay.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/ucenter/contact.vm": {
+            "uri": "/page/pages/ucenter/contact.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/ucenter/ucenter.vm": {
+            "uri": "/page/pages/ucenter/ucenter.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "page/pages/vip/index.vm": {
+            "uri": "/page/pages/vip/index.vm",
+            "type": "vm",
+            "extras": {
+                "isPage": true
+            }
+        },
+        "static/css/page/index.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/page/index_cb40659.css",
+            "type": "css"
+        },
+        "static/css/page/pc.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/page/pc_e67569c.css",
+            "type": "css"
+        },
+        "static/css/util/jquery.validator.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/util/jquery.validator_47e6332.css",
+            "type": "css"
+        },
+        "static/css/util/layer.css": {
+            "uri": "/static/css/util/layer.css",
+            "type": "css"
+        },
+        "static/css/util/layx.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/util/layx_9ddfe22.css",
+            "type": "css"
+        },
+        "static/css/util/px2rem.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/util/px2rem_d41d8cd.css",
+            "type": "css"
+        },
+        "static/css/util/swiper.min.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/util/swiper.min_c1e7355.css",
+            "type": "css"
+        },
+        "static/css/yui/demo.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/demo_6c0ccc0.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/icon-img.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/icon-img_8066044.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/iconfont.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/iconfont_b309735.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/mixins.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/mixins_d41d8cd.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/public.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/public_c4bda2a.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/reset.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/reset_c4be89a.css",
+            "type": "css"
+        },
+        "static/css/yui/extend/variables.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/extend/variables_d41d8cd.css",
+            "type": "css"
+        },
+        "static/css/yui/page/actionsheet.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/actionsheet_722728a.css",
+            "type": "css"
+        },
+        "static/css/yui/page/badge.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/badge_74b3b6b.css",
+            "type": "css"
+        },
+        "static/css/yui/page/button.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/button_a49fe25.css",
+            "type": "css"
+        },
+        "static/css/yui/page/cell.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/cell_bfff69a.css",
+            "type": "css"
+        },
+        "static/css/yui/page/cityselect.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/cityselect_700f734.css",
+            "type": "css"
+        },
+        "static/css/yui/page/dialog.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/dialog_6e9f0e8.css",
+            "type": "css"
+        },
+        "static/css/yui/page/grids.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/grids_894acad.css",
+            "type": "css"
+        },
+        "static/css/yui/page/icons.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/icons_b0d2836.css",
+            "type": "css"
+        },
+        "static/css/yui/page/keyboard.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/keyboard_40b5dcf.css",
+            "type": "css"
+        },
+        "static/css/yui/page/list.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/list_ce6e92f.css",
+            "type": "css"
+        },
+        "static/css/yui/page/navbar.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/navbar_f1ba0e6.css",
+            "type": "css"
+        },
+        "static/css/yui/page/progressbar.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/progressbar_28d6c60.css",
+            "type": "css"
+        },
+        "static/css/yui/page/scrolltab.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/scrolltab_fbd8c0e.css",
+            "type": "css"
+        },
+        "static/css/yui/page/slider.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/slider_fb94585.css",
+            "type": "css"
+        },
+        "static/css/yui/page/spinner.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/spinner_a0b4c25.css",
+            "type": "css"
+        },
+        "static/css/yui/page/tab.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/tab_11040f0.css",
+            "type": "css"
+        },
+        "static/css/yui/page/tabbar.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/page/tabbar_38a37f4.css",
+            "type": "css"
+        },
+        "static/css/yui/ydui.scss": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/css/yui/ydui_28d1e2a.css",
+            "type": "css"
+        },
+        "static/js/lib/_http-util.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/_http-util_f5c83a6.js",
+            "type": "js"
+        },
+        "static/js/lib/_ydui.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/_ydui_358b4fc.js",
+            "type": "js"
+        },
+        "static/js/lib/html2canvas.min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/html2canvas.min_0e52edb.js",
+            "type": "js"
+        },
+        "static/js/lib/jquery.min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/jquery.min_6c95078.js",
+            "type": "js"
+        },
+        "static/js/lib/JsBridge.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/JsBridge_083d464.js",
+            "type": "js"
+        },
+        "static/js/lib/qrcode.min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/qrcode.min_517b55d.js",
+            "type": "js"
+        },
+        "static/js/lib/swiper.min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/swiper.min_fcf6969.js",
+            "type": "js"
+        },
+        "static/js/lib/underscore-min.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/lib/underscore-min_dd958b8.js",
+            "type": "js"
+        },
+        "static/js/page/base.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/base_058378a.js",
+            "type": "js"
+        },
+        "static/js/page/bill.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/bill_4e0c265.js",
+            "type": "js"
+        },
+        "static/js/page/bring-up.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/bring-up_deadee4.js",
+            "type": "js"
+        },
+        "static/js/page/contact.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/contact_1595e5a.js",
+            "type": "js"
+        },
+        "static/js/page/home.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js",
+            "type": "js"
+        },
+        "static/js/page/render.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/render_a2e08e5.js",
+            "type": "js"
+        },
+        "static/js/page/top-up.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/top-up_424caff.js",
+            "type": "js"
+        },
+        "static/js/page/trading.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/trading_8878dbb.js",
+            "type": "js"
+        },
+        "static/js/page/vip.js": {
+            "uri": "//mobile.xiaobaii.com/roncoo-h5/static/js/page/vip_e03e522.js",
+            "type": "js"
+        }
+    },
+    "pkg": {}
+}

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="refresh" content="30">
+<head>
+    <title>统计信息</title>
+    <#include "/header.html">
+</head>
+<body>
+<div class="panel panel-default">
+    <div class="panel-heading">统计信息（今日）</div>
+    <div id="rrappAddUp">
+        <div v-show="showListAddUp">
+            <table id="jqGridAddUp"></table>
+        </div>
+    </div>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">统计信息（过去7天）</div>
+    <div id="rrapp">
+        <div v-show="showList">
+            <table id="jqGrid"></table>
+        </div>
+    </div>
+</div>
+</body>
+<script src="${request.contextPath}/statics/js/modules/business/main.js?_${.now?long}"></script>
+<script src="${request.contextPath}/statics/js/modules/business/mainAddUp.js?_${.now?long}"></script>
+</html>

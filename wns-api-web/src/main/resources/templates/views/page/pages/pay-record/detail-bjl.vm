@@ -1,0 +1,138 @@
+#set($title = "用户中心")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">投注记录</span></div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem">
+		<div class="pay-record-item no-title">
+			<article class="m-list list-theme4 detail-list" id="record-list">
+				<!--<div class="list-item">
+					<div class="list-left row">
+						<h3 class="list-title">
+							<span class="label-lose">庄赢</span>1.986
+							<span class="time">百家乐</span>
+							<span class="order-no">订单号:1017425200963694592</span>
+						</h3>
+					</div>
+					<div class="list-right">
+						<h3 class="list-title"><span class="text-red">赚入 198.6<span class="small">金豆</span></span>
+							<span class="time">下注 [庄赢] 100</span>
+							<span class="order-no">2018-07-12 22:27:41</span>
+						</h3>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="list-left row">
+						<h3 class="list-title">
+							<span class="label-win">闲对</span>1.986
+							<span class="time">百家乐</span>
+							<span class="order-no">订单号:1017425200963694592</span>
+						</h3>
+					</div>
+					<div class="list-right">
+						<h3 class="list-title"><span class="text-red">赚入 598.6<span class="small">金豆</span></span>
+							<span class="time">下注 [庄赢] 100</span>
+							<span class="order-no">2018-07-12 22:27:41</span>
+						</h3>
+					</div>
+				</div>
+				<div class="list-item">
+					<div class="list-left row">
+						<h3 class="list-title">
+							<span class="label-win">闲赢</span>1.986
+							<span class="time">百家乐</span>
+							<span class="order-no">订单号:1017425200963694592</span>
+						</h3>
+					</div>
+					<div class="list-right">
+						<h3 class="list-title"><span class="text-normal">赚入 0<span class="small">金豆</span></span>
+							<span class="time">下注 [庄赢] 100</span>
+							<span class="order-no">2018-07-12 22:27:41</span>
+						</h3>
+					</div>
+				</div>-->
+			</article>
+		</div>
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+
+<script type="text/template" id="tplItem">
+ <% _.each(data, function(item){ %>
+		<% var labelClass = item.drawResult == 1 ? 'label-win' : item.drawResult == 2  ? 'label-lose' : 'label-he' %>
+    <div class="list-item">
+			<div class="list-left row">
+				<h3 class="list-title">
+					<span class="<%=labelClass%>"><%=resultList[item.drawResult]%></span>
+					<span class="time">百家乐</span>
+					<span class="order-no">期数:<%=item.periods%></span>
+				</h3>
+			</div>
+			<div class="list-right">
+				<h3 class="list-title"><span class="<% if(item.finalResult > 0){%>text-red<%}else{%>text-normal<%}%>">赚入 <%=item.winMoney%> <span class="small">金豆</span></span>
+					<span class="time">下注 [<%=bottomList[item.selectedSize - 1]%>] <%=item.buyAmount%></span>
+					<span class="order-no"><%=item.addTime%></span>
+				</h3>
+			</div>
+		</div>
+  <% }); %>
+</script>
+
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/render_549dd7a.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/pay-record/detail-bjl.vm")
+#end

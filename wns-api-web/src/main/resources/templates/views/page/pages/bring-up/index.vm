@@ -1,0 +1,138 @@
+#set($title = "用户中心")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">提现</span></div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem; background: #fff">
+		<div class="discover-txt">
+				<div class="user-bar">
+					
+				</div>
+				<input type="hidden" id="userId" value="${userId}">
+				<div class="demo-small-pitch">
+					<div class="cell-item-1 cell-item-label">提现金额（一键转入微信钱包）</div>
+					<div class="cell-item cell-item-1 cell-item-inp">
+						<div class="cell-left">￥</div>
+						<div class="cell-right flex-start">
+							<input class="cell-input" type="number" id="extract-money" placeholder="0">
+						</div>
+					</div>
+					<div class="extract-tips">
+						<span>可提取<span id="balance"></span>元</span>
+						<a id="extract-all">全部提现</a>
+					</div>
+					<!--<div class="cell-item">
+						<div class="cell-left">我的金豆：</div>
+						<div class="cell-right flex-start">
+							<div id="balance"></div>
+						</div>
+					</div>
+					<div class="cell-item">
+						<div class="cell-left">金豆数量：</div>
+						<div class="cell-right">
+							<input class="cell-input" type="number" id="extract-money" placeholder="如：100">
+						</div>
+					</div>
+					<div class="cell-item">
+						<div class="cell-left">提取方式：</div>
+						<div class="cell-right">
+              <select class="cell-input" id="extract-type">
+                <option value="1">微信-安全快捷-即时到账</option>
+                <option value="2">支付宝-安全快捷-即时到账</option>
+              </select>
+						</div>
+					</div>
+          <div class="cell-item pay-option" id="pay-opt-1">
+						<div class="cell-left">微信信息：</div>
+						<div class="cell-right">
+							<input class="cell-input" type="text" placeholder="如：微信号，手机号">
+						</div>
+					</div>
+          <div class="cell-item pay-option" id="pay-opt-2" style="display: none">
+						<div class="cell-left">支付宝信息：</div>
+						<div class="cell-right">
+							<input class="cell-input" type="text" placeholder="如：支付宝帐号，手机号">
+						</div>
+					</div>-->
+				</div>
+				<a class="btn-block btn-primary btn" href="javascript:" id="confirm-extract">确认提交</a>
+
+		</div>
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+<script type="text/template" id="tmplUser">
+  <div class="user-col" style="display: flex; align-items: center;">
+    <img src="<%=headImg%>" class="user-avatar">
+    <div class="user-name"><%=nickName%>
+    <% if(isVip) {%>
+      <span class="vip">会员</span>
+    <% } %>
+    	&nbsp;&nbsp;&nbsp;&nbsp; ID：<%=id%>
+    </div>
+  </div>
+</script>
+<script type="text/template" id="tmplSuccess">
+	<div class="container-succ">
+		<i class="icon-extract-succ" />
+		<div>本次提现金额<%=extractMoney%>元。金额已转入微信“<%=userName%>” ID：<%=userId%>账号中，请注意查收。</div>
+	</div>
+</script>
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/bring-up_c985305.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/bring-up/index.vm")
+#end

@@ -1,0 +1,84 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dwj?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: QAZwsx123#
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    alidation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      #login-username: admin
+      #login-password: admin
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: false
+      wall:
+        config:
+          multi-statement-allow: true
+
+## redis 相关
+redis:
+  host: localhost
+  port: 6379
+  password: xzj123!
+  timeout: 10000
+  maxIdle: 300
+  maxTotal: 1000
+  maxWaitMillis: -1
+  minEvictableIdleTimeMillis: 300000
+  numTestsPerEvictionRun: 1024
+  timeBetweenEvictionRunsMillis: 30000
+  testOnBorrow: true
+  testWhileIdle: true
+
+## 微信配置
+weixin:
+  defaultConfigId: 7 # 公众号默认配置id
+  #appId: wxf3b8f8a0bf5d3ba5   #公众账号ID
+  appId: wx2a35978cafe75428   #公众账号ID
+  mchId: 12300001091  #商户号
+#  authToken: dwjWap123!  # 访问token
+  authToken: dwjWap123  # 访问token
+  key: 123456 # 微信支付密钥
+  replyContent: 欢迎关注，更多功能开发中...
+  subscrbeContent: "欢迎关注，热门游戏微信访问：http://play.i0jc9.cn/"
+  pay:
+      productDesc: 电子产品-Iphone X
+      productDetail: Iphone X 手机热销中...
+
+logging:
+  file: /data/logs  # 上线记得修改成 /data/logs 目录
+
+## cookie 加密秘钥
+cookie:
+  secretkey: ~#@^&dawanjia*%#wap#123!
+
+dwj:
+  domain: play.i0jc9.cn
+  promotionApi: http://47.75.208.227:8686/promotion/getUrl?flag=wls&inviterId=
+
+socketio:
+#  server: 172.105.240.123
+  server: 0.0.0.0
+  port: 9092
+
+file:
+  upload:
+    uploadDir: "/data/fileStorage/"
+    qrcodePath: "userQrcode"
+    downPath: "http://play.i0jc9.cn/fileStorage/"

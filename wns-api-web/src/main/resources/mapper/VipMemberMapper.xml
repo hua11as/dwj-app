@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjwap.dao.VipMemberMapper">
+  <resultMap id="BaseResultMap" type="com.lontyu.dwjwap.entity.VipMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="verify_code" jdbcType="VARCHAR" property="verifyCode" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="version" jdbcType="INTEGER" property="version" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="pwd_switch" jdbcType="INTEGER" property="pwdSwitch" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="inviter_id" jdbcType="INTEGER" property="inviterId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    <result column="commission" jdbcType="DECIMAL" property="commission"/>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, mobile, verify_code, amount, version, password, pwd_switch, status, inviter_id,
+    create_time, commission
+  </sql>
+
+  <select id="getVipMemberByMobile" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from t_vip_member
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_vip_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKeyForUpdate" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_vip_member
+    where id = #{id,jdbcType=INTEGER} for update
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_vip_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lontyu.dwjwap.entity.VipMember">
+    insert into t_vip_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="verifyCode != null">
+        verify_code,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="version != null">
+        version,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="pwdSwitch != null">
+        pwd_switch,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="inviterId != null">
+        inviter_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="commission != null">
+        commission,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null">
+        #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdSwitch != null">
+        #{pwdSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="inviterId != null">
+        #{inviterId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commission != null">
+        #{commission,jdbcType=DECIMAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjwap.entity.VipMember">
+    update t_vip_member
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="verifyCode != null">
+        verify_code = #{verifyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="version != null">
+        version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="pwdSwitch != null">
+        pwd_switch = #{pwdSwitch,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="inviterId != null">
+        inviter_id = #{inviterId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commission != null">
+        commission = #{commission,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateAmountByVesion" parameterType="java.util.Map">
+      update t_vip_member set amount = amount+#{amount,jdbcType=DECIMAL}, version = version+1
+        where id = #{id,jdbcType=INTEGER} and version = #{version,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByInviterIds" parameterType="java.util.List" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from t_vip_member
+    where inviter_id in
+    <foreach collection="list" item="inviterId" open="(" close=")" separator=",">
+      #{inviterId}
+    </foreach>
+  </select>
+</mapper>

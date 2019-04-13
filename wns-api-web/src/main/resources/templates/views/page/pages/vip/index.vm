@@ -1,0 +1,114 @@
+#set($title = "会员")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">会员</span></div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem; overflow: hidden">
+			<div class="container-vip">
+				<div class="vip-tab">
+					<a class="active" href="javascript:">
+						<i class="icon-vip-1"></i>一级会员
+					</a>
+					<a href="javascript:">
+						<i class="icon-vip-2"></i>二级会员
+					</a>
+					<a href="javascript:">
+						<i class="icon-vip-3"></i>三级会员
+					</a>
+					<a href="javascript:">
+						<i class="icon-vip-4"></i>四级会员
+					</a>
+					<a href="javascript:">
+						<i class="icon-vip-5"></i>五级会员
+					</a>
+				</div>
+				<div class="vip-content" id="js-vip-content">
+				</div>
+			</div>
+
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+
+<script type="text/template" id="tplContent">
+	<div class="number-info row">
+		<span><strong>成员数：</strong><%=data.count%>人</span>
+		<span><strong>返点比：</strong><%=data.rate%>%</span>
+		<span class="full"><strong>总佣金：</strong><%=data.commission%></span>
+	</div>
+	<ul class="user-list">
+		<% _.each(data.memberInfoList, function(item){ %>
+			<li class="user-card">
+				<div class="user-info">
+					<img src="<%=item.headImg%>" />
+					<span><%=item.nickName%></span>
+				</div>
+				<div class="row user-row">
+					<span><strong>充值：</strong><%=item.recharge%></span>
+					<span><strong>兑换：</strong><%=item.conversion%></span>
+					<span><strong>盈亏：</strong><%=item.profitAndLoss%></span>
+					<span><strong>金豆：</strong><%=item.beans%></span>
+				</div>
+			</li>
+		<% }); %>
+	</ul>
+</script>
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/vip_e03e522.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/vip/index.vm")
+#end

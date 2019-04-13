@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>dwj-support-server</module>
+        <module>wns-api-web</module>
+        <module>wns-admin-web</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
