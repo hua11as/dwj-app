@@ -1,0 +1,265 @@
+#set($title = "大玩家")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+<link href="//mobile.xiaobaii.com/roncoo-h5/static/css/video-js.min_cfd19c8.css" rel="stylesheet">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<div class="m-navbar-left">
+			<a href="/weChat/home/$userId" class="navbar-item"><i class="back-ico"></i></a>
+			<a href="#" class="navbar-item index-navbar-me"><img src="$headImg" alt="">ID:$userId</a>
+		</div>
+		<div class="navbar-center"><span class="navbar-title"></span></div>
+		<div class="navbar-item index-navbar-income">
+			<span class="balance">金豆：<span id="money"></span></span>
+			<a href="/ucenter/top-up" class="btn btn-primary">充值</a>
+		</div>
+	</header>
+
+	<div class="g-scrollview full-view" style="background: #443877;">
+		<div class="baijiale-wrap" style="background: #2b234c">
+			<!-- 设置播放器容器 -->
+			<div class="container-bjl">
+				<div id="id_test_video" style="display:none">
+					<a href="javascript:" class="close-video"><i class="icon-video-close"></i></a>
+					<video
+							webkit-playsinline
+							playsinline
+							id="my-player"
+							class="video-js"
+							controls
+							preload="auto"
+							data-setup='{"fluid": true, "controlBar": {}}'>
+						<p class="vjs-no-js">
+							To view this video please enable JavaScript, and consider upgrading to a
+							web browser that
+							<a href="http://videojs.com/html5-video-support/" target="_blank">
+								supports HTML5 video
+							</a>
+						</p>
+					</video>
+					<div class="mask-div"></div>
+				</div>
+				<div class="main-waiting">
+					<div class="hd">
+						<div id="timer" class="hd-item hd-left">
+							<span class="second"></span>
+							开始接受投注
+						</div>
+						<div id="stop-bottom" class="hd-item hd-left">
+							<span class="stop"></span>
+							停止投注
+						</div>
+						<div class="hd-item">在线 <strong id="people"></strong> 人</div>
+						<div class="hd-right">
+							<a href="javascript:" class="switch-video"><i class="icon-video-open"></i><span>视频</span></a>
+						</div>
+					</div>
+					<!--走势-->
+					<div class="swiper-canvas">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide">
+								<canvas id="trend"></canvas>
+								<canvas id="trendInfo"></canvas>
+							</div>
+							<div class="swiper-slide">
+								<canvas id="trend1"></canvas>
+							</div>
+						</div>
+						<!-- Add Pagination -->
+						<div class="swiper-pagination">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="tmpl-table" class="table-board">
+			</div>
+
+
+
+			<div class="people-num">
+				<span>闲 <span id="people-xian">0</span></span>
+				<span>和 <span id="people-he">0</span></span>
+				<span>庄 <span id="people-zhuan">0</span></span>
+			</div>
+			<div class="auto-height">
+				<!--下注容器-->
+				<div id="bottom">
+					<div class="row">
+						<a href="#" class="xian" data-num="0">闲 <br> <span>1:1.5</span> <span class="tips-value">+<span>0</span></span></a>
+						<a href="#" class="zhang" data-num="4">庄 <br> <span>1:1.5</span> <span class="tips-value">+<span>0</span></span></a>
+					</div>
+					<div class="row">
+						<a href="#" class="xian-pair" data-num="1">闲对 <br> <span>1:1.5</span> <span class="tips-value">+<span>0</span></span></a>
+						<a href="#" class="draw" data-num="2">和 <br> <span>1:1.5</span> <span class="tips-value">+<span>0</span></span></a>
+						<a href="#" class="zhang-pair" data-num="3">庄对 <br> <span>1:1.5</span> <span class="tips-value">+<span>0</span></span></a>
+					</div>
+				</div>
+
+				<div class="select-wrap">
+					<span class="five" data-value="5"><i class="icon-ma-5">5</i></span>
+					<span class="ten" data-value="10"><i class="icon-ma-10">10</i></span>
+					<span class="fifty" data-value="50"><i class="icon-ma-50">50</i></span>
+					<span class="hundred" data-value="100"><i class="icon-ma-100">100</i></span>
+					<span class="five-hundred active" data-value="500"><i class="icon-ma-500">500</i></span>
+					<span class="thousand" data-value="1000"><i class="icon-ma-1000">1000</i></span>
+				</div>
+			</div>
+		
+		<!--下注控制-->
+			<div id="bottom-control">
+				<!--<a href="javascript:;" class="btn btn-primary clean">清空</a>-->
+				<input type="hidden" class="select-bottom-val" value="500">
+				<a href="javascript:;" class="btn-total">共<span id="total">0</span>金币</a>
+				<!--<a href="javascript:;" class="btn btn-primary confirm disabled">确认下注</a>-->
+			</div>
+		</div>
+	</div>
+
+	#parse("../pages/common/_nav.vm")
+
+</section>
+<input type="hidden" id="userId" value="$userId">
+<input type="hidden" id="periods" value="$currentPeriod">
+<div id="toast"><div></div></div>
+<div class="modal-result">
+</div>
+
+<audio controls="controls" id="audioBegin" style="display: none">
+  <source src="//mobile.xiaobaii.com/roncoo-h5/static/sounds/begin_da6cc11.mp3" type="audio/mpeg">
+</audio>
+<audio controls="controls" id="audioStop" style="display: none">
+  <source src="//mobile.xiaobaii.com/roncoo-h5/static/sounds/stop_a546c93.mp3" type="audio/mpeg">
+</audio>
+<audio controls="controls" id="audioResult2" style="display: none">
+  <source src="//mobile.xiaobaii.com/roncoo-h5/static/sounds/zhuan_65cf773.mp3" type="audio/mpeg">
+</audio>
+<audio controls="controls" id="audioResult1" style="display: none">
+  <source src="//mobile.xiaobaii.com/roncoo-h5/static/sounds/xian_ae0a4e1.mp3" type="audio/mpeg">
+</audio>
+<audio controls="controls" id="audioResult3" style="display: none">
+  <source src="//mobile.xiaobaii.com/roncoo-h5/static/sounds/he_5b3b6d0.mp3" type="audio/mpeg">
+</audio>
+
+<script id="tmplBottom" type="text/template">
+	<div class="row">
+		<a href="javascript:" class="xian" data-num="0">闲 <br> <span>1:<%=odds[0].odds%></span> <span class="tips-value">+<span>0</span></span></a>
+		<a href="javascript:" class="zhang" data-num="4">庄 <br> <span>1:<%=odds[4].odds%></span> <span class="tips-value">+<span>0</span></span></a>
+	</div>
+	<div class="row">
+		<a href="javascript:" class="xian-pair" data-num="1">闲对 <br> <span>1:<%=odds[1].odds%></span> <span class="tips-value">+<span>0</span></span></a>
+		<a href="javascript:" class="draw" data-num="2">和 <br> <span>1:<%=odds[2].odds%></span> <span class="tips-value">+<span>0</span></span></a>
+		<a href="javascript:" class="zhang-pair" data-num="3">庄对 <br> <span>1:<%=odds[3].odds%></span> <span class="tips-value">+<span>0</span></span></a>
+	</div>
+</script>
+
+<script id="tmplTable" type="text/template">
+	<div id="board">
+		<div class="points-list left">
+			<a href="#" class="xian">闲<span class="type"><% if(currentStatus === 3){%><%=clientResultSum%><%}%></span>点</a>
+			<div class="inner">
+				<% if(currentStatus === 3){ %>
+					<% _.each(clientResultArr, function(item, inx){ %>
+						<i class="icon-pai-<%=clientResultColorArr[inx]%>-<%=item%>"></i>
+					<% }) %>
+				<% } %>
+			</div>
+		</div>
+		<!--<div class="play-result-outer">
+			<% if(currentStatus === 3){ %>
+				<span class="play-result">
+					<% if(bankResultSum > clientResultSum) { %>
+					<span class="animate-result zhuan">
+						庄赢
+					<% } else {%>
+					<span class="animate-result xian">
+						闲赢
+					<% }%>
+					</span>
+				</span>
+			<% } %>
+		</div>-->
+		<div class="points-list right">
+			<a href="#" class="zhang">庄<span class="type"><% if(currentStatus === 3){%><%=bankResultSum%><%}%></span>点</a>
+			<div class="inner">
+				<% if(currentStatus === 3){ %>
+					<% _.each(bankResultArr, function(item, inx){ %>
+						<i class="icon-pai-<%=bankResultColorArr[inx]%>-<%=item%>"></i>
+					<% }) %>
+				<% } %>
+			</div>
+		</div>
+	</div>
+</script>
+<script id="tmplModalResult" type="text/template">
+	<% if (peroidAmount == 0) {%>
+		<p>再接再厉，下一局您就发了！</p>
+		<a href="javascript:" class="btn-modal-confirm">继续下一局</a>
+	<% } else if (peroidAmount > 0) {%>
+		<h4>YOU WIN</h4>
+		<p>本次下注获得金豆<%=peroidAmount%></p>
+		<a href="javascript:" class="btn-modal-confirm">太棒了，继续赢</a>
+	<% } else {%>
+		<h4>YOU LOSE</h4>
+		<p>本次下注输掉金豆<%=Math.abs(peroidAmount)%></p>
+		<a href="javascript:" class="btn-modal-confirm">不服，继续挑战</a>
+	<% } %>
+</script>
+
+
+#parse("../pages/common/_script.vm")
+<script src="https://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/lib/video.min_ee948a4.js"></script>
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/lib/socket.io.min_c69d565.js"></script>
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/baijiale_a5ada66.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/baijiale/baijiale.vm")
+#end

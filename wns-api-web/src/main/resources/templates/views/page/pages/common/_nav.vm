@@ -1,0 +1,78 @@
+<footer class="m-tabbar tabbar-fixed nav-menu">
+</footer>
+<script type="text/template" id="tmplNav">
+
+	#if($nav1 == "游戏")
+		<a href="/weChat/home/<%=userInfoVO.id%>" class="tabbar-item #if($title == "大玩家") tabbar-active #end">
+					<span class="tabbar-icon">
+						#if($title == "大玩家")
+							<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/youxi-active_c7a467b.png" alt="">
+						#else
+							<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/youxi_2d80d33.png" alt="">
+						#end
+					</span>
+			<span class="tabbar-txt">游戏</span>
+		</a>
+	#else
+		<a href="/bjl/<%=userInfoVO.id%>" class="tabbar-item #if($title == "大玩家") tabbar-active #end">
+					<span class="tabbar-icon">
+						#if($title == "大玩家")
+							<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/youxi-active_c7a467b.png" alt="">
+						#else
+							<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/youxi_2d80d33.png" alt="">
+						#end
+					</span>
+			<span class="tabbar-txt">百家乐</span>
+		</a>
+	#end
+	<!-- <a href="/bjl/$userId" class="tabbar-item #if($title == "开奖列表") tabbar-active #end">
+                <span class="tabbar-icon">
+	                #if($title == "开奖列表")
+	                    <img src="/static/images/nav/kaijiang-active.png" alt="">
+	                #else
+	                     <img src="/static/images/nav/kaijiang.png" alt="">
+	                #end
+                </span>
+		<span class="tabbar-txt">开奖</span>
+	</a> -->
+	<a href="/adv/spread/<%=userInfoVO.id%>" class="tabbar-item #if($title == "推广") tabbar-active #end">
+                <span class="tabbar-icon">
+	               #if($title == "推广")
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/tuiguang-active_4c47540.png" alt="">
+					#else
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/tuiguang_b029779.png" alt="">
+	                #end
+                </span>
+		<span class="tabbar-txt">推广</span>
+	</a>
+	<a href="/vip" class="tabbar-item #if($title == "推广") tabbar-active #end">
+                <span class="tabbar-icon">
+	               #if($title == "会员")
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/huiyuan-active_3028e81.png" alt="">
+					#else
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/huiyuan_430ea36.png" alt="">
+	                #end
+                </span>
+		<span class="tabbar-txt">会员</span>
+	</a>
+	<a href="/contact" class="tabbar-item #if($title == "联系客服") tabbar-active #end">
+                <span class="tabbar-icon">
+	               #if($title == "联系客服")
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/kefu-active_a36bb95.png" alt="">
+					#else
+	                    <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/kefu_e36a3b8.png" alt="">
+	                #end
+                </span>
+		<span class="tabbar-txt">客服</span>
+	</a>
+	<a href="/weChat/ucenter/<%=userInfoVO.id%>" class="tabbar-item  #if($title == "用户中心") tabbar-active #end">
+			 <span class="tabbar-icon">
+				     #if($title == "用户中心")
+				        <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/zhanghu-active_2b0843b.png" alt="">
+				    #else
+				        <img src="//mobile.xiaobaii.com/roncoo-h5/static/images/nav/zhanghu_c283844.png" alt="">
+				    #end
+                </span>
+		<span class="tabbar-txt">我</span>
+	</a>
+</script>

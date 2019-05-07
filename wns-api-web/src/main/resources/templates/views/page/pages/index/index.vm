@@ -1,0 +1,19 @@
+#set($title = "微信网页授权")
+
+#extends("page/layouts/main.vm")
+
+
+
+#block("body")
+
+
+<script>
+    host = window.location.host;
+    var backUrl = encodeURI('http://'+host+'/weChat/getOpenId/${configid}?inviterId=${inviterId}');
+    window.location.href='https://open.weixin.qq.com/connect/oauth2/authorize?appid=${wxAppId}&redirect_uri='+backUrl+'&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect';
+</script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/index/index.vm")
+#end

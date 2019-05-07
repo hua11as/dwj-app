@@ -1,0 +1,141 @@
+#set($title = "账单列表")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">账单列表</span></div>
+		<div class="navbar-item index-navbar-income last">
+			<a href="javascript:;" class="btn btn-primary filter-bill">筛选</a>
+		</div>
+		<div class="filter-nav filter-bill-nav">
+			<div class="inner">
+				<a data-type="3">赚入</a>
+				<a data-type="4">下注</a>
+				<a class="active" data-type="1">充值</a>
+				<a data-type="2">提现</a>
+				<a data-type="5">佣金</a>
+				<a data-type="9">提现申请</a>
+				<a data-type="10">提现退回</a>
+			</div>
+			<div class="mask"></div>
+		</div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem">
+			<div class="pay-record-item">
+				<article class="m-list list-theme4" id="bill-list">
+				</article>
+			</div>
+			<!--<div class="pay-record-item">
+				<h3 class="article-tt">2018年7月</h3>
+				<article class="m-list list-theme4">
+					<a href="javascript:;" class="list-item">
+						<div class="list-left">
+								<h3 class="list-title">07-28  
+								<span class="time">10:23</span></h3>
+								<h3 class="list-title">充值
+								</h3>
+						</div>
+						<div class="list-right">
+							<h3 class="list-title"><span class="text-red">+2000金豆</span>
+								<span class="time">充值</span>
+							</h3>
+						</div>
+					</a>
+					<a href="javascript:;" class="list-item">
+						<div class="list-left">
+								<h3 class="list-title">07-28  
+								<span class="time">10:23</span></h3>
+								<h3 class="list-title">重庆时时彩<span class="time">20180622094</span>
+								</h3>
+						</div>
+						<div class="list-right">
+							<h3 class="list-title"><span class="text-red">+80金豆</span>
+								<span class="time">赚入</span>
+							</h3>
+						</div>
+					</a>
+				</article>
+			</div>-->
+
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+
+<script type="text/template" id="tplItem">
+ <% _.each(data, function(item){ %>
+    <a href="javascript:;" class="list-item">
+			<div class="list-left">
+					<h3 class="list-title"><%=titleLists[item.type]%> <span class="time"><%=item.createTime%></span>
+					</h3>
+			</div>
+			<div class="list-right">
+				<h3 class="list-title"><span class="
+					<% if(item.type == 1 || item.type == 3 || item.type == 5 || item.type == 10){ %>
+						text-red">+
+					<%} else {%>
+						text-green">-
+					<%}%>
+				<%=item.amount%>金豆</span>
+					<span class="time"><%=titleLists[item.type]%></span>
+				</h3>
+			</div>
+		</a>
+  <% }); %>
+</script>
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/bill_c30ac9e.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/bill-list/index.vm")
+#end

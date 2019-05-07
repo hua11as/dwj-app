@@ -1,0 +1,26 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  port: 8081
+#  servlet:
+#    context-path:
+
+spring:
+  # 上线记得修改成对应的实例
+  application:
+    name: dwj-wap
+    index: 1
+  resources:
+    static-locations: classpath:/static/
+  profiles:
+    active: prod
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+mybatis:
+  mapper-locations: classpath*:mapper/**/*.xml  #注意：一定要对应mapper映射xml文件的所在路径
+  type-aliases-package: com.lontyu.dwj.entity  # 注意：对应实体类的路径

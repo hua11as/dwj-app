@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjadmin.dao.BjlDrawRecordsMapper">
+  <resultMap id="BaseResultMap" type="com.lontyu.dwjadmin.entity.BjlDrawRecords">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="award_period" jdbcType="VARCHAR" property="awardPeriod" />
+    <result column="draw_result" jdbcType="INTEGER" property="drawResult" />
+    <result column="award_video" jdbcType="INTEGER" property="awardVideo" />
+    <result column="statistical_method" jdbcType="INTEGER" property="statisticalMethod" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="start_order_time" jdbcType="TIMESTAMP" property="startOrderTime" />
+    <result column="end_order_time" jdbcType="TIMESTAMP" property="endOrderTime" />
+    <result column="start_wait_play_time" jdbcType="TIMESTAMP" property="startWaitPlayTime" />
+    <result column="end_wait_play_time" jdbcType="TIMESTAMP" property="endWaitPlayTime" />
+    <result column="start_play_time" jdbcType="TIMESTAMP" property="startPlayTime" />
+    <result column="end_play_time" jdbcType="TIMESTAMP" property="endPlayTime" />
+    <result column="start_show_result_time" jdbcType="TIMESTAMP" property="startShowResultTime" />
+    <result column="end_show_result_time" jdbcType="TIMESTAMP" property="endShowResultTime" />
+    <result column="pre_video_1" jdbcType="INTEGER" property="preVideo1" />
+    <result column="pre_video_2" jdbcType="INTEGER" property="preVideo2" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="force_tie" jdbcType="INTEGER" property="forceTie" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="del_flag" jdbcType="INTEGER" property="delFlag" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, award_period, draw_result, award_video, statistical_method, remark, start_order_time, 
+    end_order_time, start_wait_play_time, end_wait_play_time, start_play_time, end_play_time, 
+    start_show_result_time, end_show_result_time, pre_video_1, pre_video_2, status, force_tie, add_time,
+    update_time, del_flag
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from bjl_draw_records
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByAwardPeriod" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bjl_draw_records
+    where award_period = #{awardPeriod,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bjl_draw_records
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lontyu.dwjadmin.entity.BjlDrawRecords">
+    insert into bjl_draw_records (id, award_period, draw_result, 
+      award_video, statistical_method, remark, 
+      start_order_time, end_order_time, start_wait_play_time, 
+      end_wait_play_time, start_play_time, end_play_time, 
+      start_show_result_time, end_show_result_time, 
+      pre_video_1, pre_video_2, status, force_tie,
+      add_time, update_time, del_flag
+      )
+    values (#{id,jdbcType=INTEGER}, #{awardPeriod,jdbcType=VARCHAR}, #{drawResult,jdbcType=INTEGER}, 
+      #{awardVideo,jdbcType=INTEGER}, #{statisticalMethod,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{startOrderTime,jdbcType=TIMESTAMP}, #{endOrderTime,jdbcType=TIMESTAMP}, #{startWaitPlayTime,jdbcType=TIMESTAMP}, 
+      #{endWaitPlayTime,jdbcType=TIMESTAMP}, #{startPlayTime,jdbcType=TIMESTAMP}, #{endPlayTime,jdbcType=TIMESTAMP}, 
+      #{startShowResultTime,jdbcType=TIMESTAMP}, #{endShowResultTime,jdbcType=TIMESTAMP}, 
+      #{preVideo1,jdbcType=INTEGER}, #{preVideo2,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{forceTie,jdbcType=INTEGER}
+      #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{delFlag,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.lontyu.dwjadmin.entity.BjlDrawRecords">
+    insert into bjl_draw_records
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="awardPeriod != null">
+        award_period,
+      </if>
+      <if test="drawResult != null">
+        draw_result,
+      </if>
+      <if test="awardVideo != null">
+        award_video,
+      </if>
+      <if test="statisticalMethod != null">
+        statistical_method,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="startOrderTime != null">
+        start_order_time,
+      </if>
+      <if test="endOrderTime != null">
+        end_order_time,
+      </if>
+      <if test="startWaitPlayTime != null">
+        start_wait_play_time,
+      </if>
+      <if test="endWaitPlayTime != null">
+        end_wait_play_time,
+      </if>
+      <if test="startPlayTime != null">
+        start_play_time,
+      </if>
+      <if test="endPlayTime != null">
+        end_play_time,
+      </if>
+      <if test="startShowResultTime != null">
+        start_show_result_time,
+      </if>
+      <if test="endShowResultTime != null">
+        end_show_result_time,
+      </if>
+      <if test="preVideo1 != null">
+        pre_video_1,
+      </if>
+      <if test="preVideo2 != null">
+        pre_video_2,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="forceTie != null">
+        force_tie,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="delFlag != null">
+        del_flag,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="awardPeriod != null">
+        #{awardPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="drawResult != null">
+        #{drawResult,jdbcType=INTEGER},
+      </if>
+      <if test="awardVideo != null">
+        #{awardVideo,jdbcType=INTEGER},
+      </if>
+      <if test="statisticalMethod != null">
+        #{statisticalMethod,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="startOrderTime != null">
+        #{startOrderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endOrderTime != null">
+        #{endOrderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startWaitPlayTime != null">
+        #{startWaitPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endWaitPlayTime != null">
+        #{endWaitPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startPlayTime != null">
+        #{startPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPlayTime != null">
+        #{endPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startShowResultTime != null">
+        #{startShowResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endShowResultTime != null">
+        #{endShowResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preVideo1 != null">
+        #{preVideo1,jdbcType=INTEGER},
+      </if>
+      <if test="preVideo2 != null">
+        #{preVideo2,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="forceTie != null">
+        #{forceTie,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        #{delFlag,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lontyu.dwjadmin.entity.BjlDrawRecords">
+    update bjl_draw_records
+    <set>
+      <if test="awardPeriod != null">
+        award_period = #{awardPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="drawResult != null">
+        draw_result = #{drawResult,jdbcType=INTEGER},
+      </if>
+      <if test="awardVideo != null">
+        award_video = #{awardVideo,jdbcType=INTEGER},
+      </if>
+      <if test="statisticalMethod != null">
+        statistical_method = #{statisticalMethod,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="startOrderTime != null">
+        start_order_time = #{startOrderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endOrderTime != null">
+        end_order_time = #{endOrderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startWaitPlayTime != null">
+        start_wait_play_time = #{startWaitPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endWaitPlayTime != null">
+        end_wait_play_time = #{endWaitPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startPlayTime != null">
+        start_play_time = #{startPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endPlayTime != null">
+        end_play_time = #{endPlayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="startShowResultTime != null">
+        start_show_result_time = #{startShowResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endShowResultTime != null">
+        end_show_result_time = #{endShowResultTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="preVideo1 != null">
+        pre_video_1 = #{preVideo1,jdbcType=INTEGER},
+      </if>
+      <if test="preVideo2 != null">
+        pre_video_2 = #{preVideo2,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="forceTie != null">
+        force_tie = #{forceTie,jdbcType=INTEGER},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="delFlag != null">
+        del_flag = #{delFlag,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjadmin.entity.BjlDrawRecords">
+    update bjl_draw_records
+    set award_period = #{awardPeriod,jdbcType=VARCHAR},
+      draw_result = #{drawResult,jdbcType=INTEGER},
+      award_video = #{awardVideo,jdbcType=INTEGER},
+      statistical_method = #{statisticalMethod,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      start_order_time = #{startOrderTime,jdbcType=TIMESTAMP},
+      end_order_time = #{endOrderTime,jdbcType=TIMESTAMP},
+      start_wait_play_time = #{startWaitPlayTime,jdbcType=TIMESTAMP},
+      end_wait_play_time = #{endWaitPlayTime,jdbcType=TIMESTAMP},
+      start_play_time = #{startPlayTime,jdbcType=TIMESTAMP},
+      end_play_time = #{endPlayTime,jdbcType=TIMESTAMP},
+      start_show_result_time = #{startShowResultTime,jdbcType=TIMESTAMP},
+      end_show_result_time = #{endShowResultTime,jdbcType=TIMESTAMP},
+      pre_video_1 = #{preVideo1,jdbcType=INTEGER},
+      pre_video_2 = #{preVideo2,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      force_tie = #{forceTie,jdbcType=INTEGER},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      del_flag = #{delFlag,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectActiveRecordForUpdate"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bjl_draw_records
+    where status = 0
+  </select>
+</mapper>

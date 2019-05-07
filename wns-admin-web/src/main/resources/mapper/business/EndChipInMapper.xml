@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjadmin.dao.BjlEndChipinMapper">
+    <resultMap id="BaseResultMap" type="com.lontyu.dwjadmin.entity.BjlEndChipin">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="video_serial" jdbcType="VARCHAR" property="videoSerial"/>
+        <result column="play_order" jdbcType="INTEGER" property="playOrder"/>
+        <result column="current_periods" jdbcType="INTEGER" property="currentPeriods"/>
+        <result column="end_chipIn_time" jdbcType="TIME" property="endChipinTime"/>
+        <result column="current_result" jdbcType="INTEGER" property="currentResult"/>
+        <result column="player_point" jdbcType="VARCHAR" property="playerPoint"/>
+        <result column="banker_point" jdbcType="VARCHAR" property="bankerPoint"/>
+        <result column="link_adress" jdbcType="VARCHAR" property="linkAdress"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, video_serial, play_order, current_periods, end_chipIn_time, current_result, player_point, banker_point, link_adress, add_time, remark
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_end_chipin
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectAllByObject" parameterType="com.lontyu.dwjadmin.entity.BjlEndChipin" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_end_chipin
+        where 1=1
+        <if test="id != null">
+            and id = #{id,jdbcType=INTEGER}
+        </if>
+        <if test="videoSerial != null">
+            and video_serial = #{videoSerial,jdbcType=VARCHAR}
+        </if>
+        <if test="currentPeriods != null">
+            and current_periods = #{currentPeriods,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from bjl_end_chipin  where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <insert id="insert" parameterType="com.lontyu.dwjadmin.entity.BjlEndChipin">
+        insert into bjl_end_chipin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="videoSerial != null">
+                video_serial,
+            </if>
+            <if test="playOrder != null">
+                play_order,
+            </if>
+            <if test="currentPeriods != null">
+                current_periods,
+            </if>
+            <if test="endChipinTime != null">
+                end_chipIn_time,
+            </if>
+            <if test="currentResult != null">
+                current_result,
+            </if>
+            <if test="playerPoint != null">
+                player_point,
+            </if>
+            <if test="bankerPoint != null">
+                banker_point,
+            </if>
+            <if test="linkAdress != null">
+                link_adress,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="videoSerial != null">
+                #{videoSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="playOrder != null">
+                #{playOrder,jdbcType=INTEGER},
+            </if>
+            <if test="currentPeriods != null">
+                #{currentPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="endChipinTime != null">
+                #{endChipinTime,jdbcType=TIME},
+            </if>
+            <if test="currentResult != null">
+                #{currentResult,jdbcType=INTEGER},
+            </if>
+            <if test="playerPoint != null">
+                #{playerPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="bankerPoint != null">
+                #{bankerPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="linkAdress != null">
+                #{linkAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjadmin.entity.BjlEndChipin">
+        update bjl_end_chipin
+        <set>
+            <if test="videoSerial != null">
+                video_serial = #{videoSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="playOrder != null">
+                play_order = #{playOrder,jdbcType=INTEGER},
+            </if>
+            <if test="currentPeriods != null">
+                current_periods = #{currentPeriods,jdbcType=INTEGER},
+            </if>
+            <if test="endChipinTime != null">
+                end_chipIn_time = #{endChipinTime,jdbcType=TIME},
+            </if>
+            <if test="currentResult != null">
+                current_result = #{currentResult,jdbcType=INTEGER},
+            </if>
+            <if test="playerPoint != null">
+                player_point = #{playerPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="bankerPoint != null">
+                banker_point = #{bankerPoint,jdbcType=VARCHAR},
+            </if>
+            <if test="linkAdress != null">
+                link_adress = #{linkAdress,jdbcType=VARCHAR},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+</mapper>

@@ -1,0 +1,150 @@
+#set($title = "用户中心")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">用户中心</span></div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem;margin-top: 0">
+		<div class="ucenter-header">
+			<div class="ucenter-top">
+				<div class="user-bar">
+					<div class="user-col">
+						<img src="$!weChatMember.headImg" class="user-avatar">
+						<div class="user-name">$!weChatMember.nickName
+						#if($!vipId)
+						<span class="vip">会员</span>
+						#end
+						</div>
+						<div class="user-id">ID：$!weChatMember.id</div>
+					</div>
+					<div class="user-col user-money">金豆：$!totalAmount</div>
+				</div>
+				<p class="btn-grounp">
+					<a href="/ucenter/top-up" class="btn btn-primary recharge">充值</a>
+					<a href="/ucenter/bring-up" class="btn btn-primary">提现</a>
+				</p>
+			</div>
+			<ul class="m-grids-3">
+				<li class="grids-item">
+					<div class="grids-txt">
+						<p>$!commission元</p>
+						<p class="second">今日佣金</p>
+					</div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-txt">
+						<p>$!charge元</p>
+						<p class="second">今日充值</p>
+					</div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-txt">
+						<p>
+							#if($!profitLoss > 0)
+							+$!profitLoss
+							#else
+							$!profitLoss
+							#end元</p>
+						<p class="second">盈亏状况</p>
+					</div>
+				</li>
+			</ul>
+
+		</div>
+
+		<div class="m-cell">
+			<a class="cell-item" href="/record/detail/bjl">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-01"></i></span>投注记录
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>
+			<a class="cell-item" href="/tradingRecord/pay">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-02"></i></span>充值记录
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>
+			<a class="cell-item" href="/bill">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-03"></i></span>账单明细
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>
+		</div> 
+		<div class="m-cell">
+			<a class="cell-item" href="/weChat/bind/$!weChatMember.id">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-04"></i></span>手机绑定
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>
+			<a class="cell-item" href="/contact">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-07"></i></span>联系客服
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>
+			<!--<a class="cell-item logout" href="javascipt:">
+				<div class="cell-left"><span class="cell-icon"><i class="icon-uc-08"></i></span>退出
+				</div>
+				<div class="cell-right cell-arrow"></div>
+			</a>-->
+		</div>
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+
+
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/ucenter/ucenter.vm")
+#end

@@ -1,0 +1,249 @@
+#set($title = "用户中心")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">投注记录</span></div>
+		<div class="navbar-item index-navbar-income">
+			<a href="javascript:;" class="btn btn-primary pay-record-filter">筛选</a>
+		</div>
+
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem">
+		<div class="pay-record-item">
+			<h3 class="article-tt">07-02</h3>
+			<article class="m-list list-theme4">
+				<a href="/record/detail/alltime" class="list-item">
+					<div class="list-img">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/shishicai_5239b49.png" alt="">
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">重庆时时彩 <span class="date">06月22日</span> <span class="time">21:42</span>
+							<span class="order-no">20180622094</span></h3>
+						<div class="list-mes-item">
+							<div class="order-no-item">
+								<span class="">5</span>
+								<span class="">8</span>
+								<span class="">2</span>
+								<span class="">10</span>
+								<span class="">6</span>
+								<span class="">4</span>
+								<span class="">9</span>
+								<span class="">3</span>
+								<span class="">1</span>
+								<span class="">7</span>
+							</div>
+						</div>
+						<div class="list-mes-item">
+							<div class="order-standard">
+								<span class="">12</span>
+								<span class="">大</span>
+								<span class="">双</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+
+							</div>
+						</div>
+					</div>
+				</a>
+				<a href="/record/detail/bjl" class="list-item">
+					<div class="list-img">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/xinyunfeiting_16bb975.png" alt="">
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">百家乐 <span class="time">20180622094</span></h3>
+						<div class="list-mes-item">
+							共下32注
+						</div>
+					</div>
+						<div class="list-mes">
+							<div class="time-last">21:42</div>
+						</div>
+				</a>
+				<a href="javascript:;" class="list-item">
+					<div class="list-img">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/beijingsaiche_83b84eb.png" alt="">
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">北京赛车 <span class="date">06月22日</span> <span class="time">21:42</span>
+							<span class="order-no">20180622094</span></h3>
+						<div class="list-mes-item">
+							<div class="order-no-item">
+								<span class="">5</span>
+								<span class="">8</span>
+								<span class="">2</span>
+								<span class="">10</span>
+								<span class="">6</span>
+								<span class="">4</span>
+								<span class="">9</span>
+								<span class="">3</span>
+								<span class="">1</span>
+								<span class="">7</span>
+							</div>
+						</div>
+						<div class="list-mes-item">
+							<div class="order-standard">
+								<span class="">12</span>
+								<span class="">大</span>
+								<span class="">双</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+
+							</div>
+						</div>
+					</div>
+				</a>
+
+
+			</article>
+		</div>
+		<div class="pay-record-item">
+			<h3 class="article-tt">07-02</h3>
+			<article class="m-list list-theme4">
+				<a href="/record/detail/alltime" class="list-item">
+					<div class="list-img">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/shishicai_5239b49.png" alt="">
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">重庆时时彩 <span class="date">06月22日</span> <span class="time">21:42</span>
+							<span class="order-no">20180622094</span></h3>
+						<div class="list-mes-item">
+							<div class="order-no-item">
+								<span class="">5</span>
+								<span class="">8</span>
+								<span class="">2</span>
+								<span class="">10</span>
+								<span class="">6</span>
+								<span class="">4</span>
+								<span class="">9</span>
+								<span class="">3</span>
+								<span class="">1</span>
+								<span class="">7</span>
+							</div>
+						</div>
+						<div class="list-mes-item">
+							<div class="order-standard">
+								<span class="">12</span>
+								<span class="">大</span>
+								<span class="">双</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+
+							</div>
+						</div>
+					</div>
+				</a>
+				<a href="javascript:;" class="list-item">
+					<div class="list-img">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/beijingsaiche_83b84eb.png" alt="">
+					</div>
+					<div class="list-mes">
+						<h3 class="list-title">北京赛车 <span class="date">06月22日</span> <span class="time">21:42</span>
+							<span class="order-no">20180622094</span></h3>
+						<div class="list-mes-item">
+							<div class="order-no-item">
+								<span class="">5</span>
+								<span class="">8</span>
+								<span class="">2</span>
+								<span class="">10</span>
+								<span class="">6</span>
+								<span class="">4</span>
+								<span class="">9</span>
+								<span class="">3</span>
+								<span class="">1</span>
+								<span class="">7</span>
+							</div>
+						</div>
+						<div class="list-mes-item">
+							<div class="order-standard">
+								<span class="">12</span>
+								<span class="">大</span>
+								<span class="">双</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+								<span class="">龙</span>
+
+							</div>
+						</div>
+					</div>
+				</a>
+
+
+			</article>
+		</div>
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+
+
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/pay-record/pay-record.vm")
+#end

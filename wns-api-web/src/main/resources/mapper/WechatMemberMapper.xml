@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjwap.dao.WechatMemberMapper">
+  <resultMap id="BaseResultMap" type="com.lontyu.dwjwap.entity.WechatMember">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="vip_id" jdbcType="INTEGER" property="vipId" />
+    <result column="head_img" jdbcType="VARCHAR" property="headImg" />
+    <result column="weconfig_id" jdbcType="INTEGER" property="weconfigId" />
+    <result column="syn_date" jdbcType="TIMESTAMP" property="synDate" />
+    <result column="inviter_id" jdbcType="INTEGER" property="inviterId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, open_id, nick_name, vip_id, head_img, weconfig_id, syn_date, inviter_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_wechat_member
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_wechat_member
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lontyu.dwjwap.entity.WechatMember" useGeneratedKeys="true" keyProperty="id">
+    insert into t_wechat_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="vipId != null">
+        vip_id,
+      </if>
+      <if test="headImg != null">
+        head_img,
+      </if>
+      <if test="weconfigId != null">
+        weconfig_id,
+      </if>
+      <if test="synDate != null">
+        syn_date,
+      </if>
+      <if test="inviterId != null">
+        inviter_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="vipId != null">
+        #{vipId,jdbcType=INTEGER},
+      </if>
+      <if test="headImg != null">
+        #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="weconfigId != null">
+        #{weconfigId,jdbcType=INTEGER},
+      </if>
+      <if test="synDate != null">
+        #{synDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviterId != null">
+        #{inviterId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjwap.entity.WechatMember">
+    update t_wechat_member
+    <set>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="vipId != null">
+        vip_id = #{vipId,jdbcType=INTEGER},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="weconfigId != null">
+        weconfig_id = #{weconfigId,jdbcType=INTEGER},
+      </if>
+      <if test="synDate != null">
+        syn_date = #{synDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inviterId != null">
+        inviter_id = #{inviterId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <select id="getWeChatMemberByOpenId" resultMap="BaseResultMap" parameterType="java.util.HashMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_wechat_member
+    where open_id = #{openId,jdbcType=VARCHAR}
+    and weconfig_id = #{wxConfigId,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectNoSysnData" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"/>
+    from t_wechat_member
+    where date_format(syn_date,'%Y-%m-%d')!=date_format(current_date,'%Y-%m-%d') limit 100
+  </select>
+  
+  <update id="sysnUpdateInfo" parameterType="com.lontyu.dwjwap.entity.WechatMember" >
+      update t_wechat_member
+    <set>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImg != null">
+        head_img = #{headImg,jdbcType=VARCHAR},
+      </if>
+      <if test="synDate != null">
+        syn_date = #{synDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where open_id = #{openId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectByVipId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_wechat_member
+    where  vip_id = #{vipId,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+      select
+      <include refid="Base_Column_List" />
+      from t_wechat_member
+      where open_id = #{openId,jdbcType=VARCHAR}
+  </select>
+
+</mapper>

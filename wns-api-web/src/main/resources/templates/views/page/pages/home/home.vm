@@ -1,0 +1,290 @@
+#set($title = "大玩家")
+#set($nav1 = "游戏")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="#" class="navbar-item index-navbar-me"><img src="$headImg" alt="">ID:$userId</a>
+		<div class="navbar-center"><span class="navbar-title"></span></div>
+		<div class="navbar-item index-navbar-income">
+			<span class="balance">金豆：<span id="money">0</span></span>
+			<a href="/ucenter/top-up" class="btn btn-primary">充值</a>
+		</div>
+	</header>
+
+	<div class="g-scrollview" style="">
+		<div class="swiper-container2">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide">
+					<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/slider-1_aac9c68.jpg">
+				</div>
+				<div class="swiper-slide">
+					<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/slider-1_aac9c68.jpg">
+				</div>
+				<div class="swiper-slide">
+					<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/slider-1_aac9c68.jpg">
+				</div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+
+		<!--<div style="margin-top: .1rem">
+			<ul class="m-grids-2">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/dazhuanpan.png"/>
+						<span>热门活动</span>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/zhongjianshenqi.png"/>
+						<span> 中奖神器</span>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+			</ul>
+		</div>-->
+
+		<div class="home-section"> 
+			<h2 class="h1">热门游戏</h2>
+			<ul class="m-grids-2 game">
+				<li class="hot-game">
+					<a href="/bjl/$userId">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/game1_b9b8edc.jpg"/>
+					</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="home-section"> 
+			<h2 class="h2">体育赛事</h2>
+			<ul class="m-grids-2 game" style="opacity: 0.5">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/beijingsaiche_83b84eb.png"/>
+						<div class="text-group">
+							<p>北京赛车</p>
+							<p class="second">5分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<a href="#">
+						<div class="grids-icon">
+							<img src="//mobile.xiaobaii.com/roncoo-h5/static/images/home/shishicai_5239b49.png"/>
+							<div class="text-group">
+								<p>重庆时时彩</p>
+								<p class="second">10分钟一期</p>
+							</div>
+						</div>
+						<div class="grids-txt"></div>
+					</a>
+				</li>
+			</ul>
+				<!--<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/shijiebei.png"/>
+						<div class="text-group">
+							<p>俄罗斯世界杯</p>
+							<p class="second">6月14日 - 7月15日</p>
+						</div>
+
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<a href="#">
+						<div class="grids-icon">
+
+							<img src="/static/images/home/zuqiujincai.png"/>
+							<div class="text-group">
+								<p>足球竞猜</p>
+								<p class="second">全球赛事</p>
+							</div>
+
+						</div>
+					</a>
+					<div class="grids-txt"></div>
+				</li>-->
+		</div>
+
+		<!--<div style="margin-top: .1rem;background: white;padding-top: .2rem;margin-bottom: 1.2rem">
+			<h2 class="h2">彩票游戏</h2>
+			<ul class="m-grids-2 game">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/beijingsaiche.png"/>
+						<div class="text-group">
+							<p>北京赛车</p>
+							<p class="second">5分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<a href="#">
+						<div class="grids-icon">
+							<img src="/static/images/home/shishicai.png"/>
+							<div class="text-group">
+								<p>重庆时时彩</p>
+								<p class="second">10分钟一期</p>
+							</div>
+						</div>
+						<div class="grids-txt"></div>
+					</a>
+				</li>
+			</ul>
+			<ul class="m-grids-2 game">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/kaileshifen.png"/>
+						<div class="text-group">
+							<p>广东快乐十分</p>
+							<p class="second">10分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/pccaidan.png"/>
+						<div class="text-group">
+							<p>PC彩蛋-日场</p>
+							<p class="second">5分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+			</ul>
+			<ul class="m-grids-2 game">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/xinyunnongchang.png"/>
+						<div class="text-group">
+							<p>幸运农场</p>
+							<p class="second">10分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/xinyunfeiting.png"/>
+						<div class="text-group">
+							<p>幸运飞艇</p>
+							<p class="second">5分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+			</ul>
+			<ul class="m-grids-2 game">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/jipingfeiche.png"/>
+						<div class="text-group">
+							<p>极品飞车</p>
+							<p class="second">全天开放</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/shishigaopingcai.png" alt="">
+						<div class="text-group">
+							<p>时时高频彩</p>
+							<p class="second">全天开放</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+			</ul>
+			<ul class="m-grids-2 game">
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/xingyunpc.png"/>
+						<div class="text-group">
+							<p>幸运pc</p>
+							<p class="second">3分钟一期</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+				<li class="grids-item">
+					<div class="grids-icon">
+						<img src="/static/images/home/liuhecai.png" alt="">
+						<div class="text-group">
+							<p>香港六合彩</p>
+							<p class="second">每周二，四，六</p>
+						</div>
+					</div>
+					<div class="grids-txt"></div>
+				</li>
+			</ul>
+		</div>-->
+	</div>
+
+	#parse("../pages/common/_nav.vm")
+
+</section>
+
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/home_675eca0.js"></script>
+
+
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/home/home.vm")
+#end

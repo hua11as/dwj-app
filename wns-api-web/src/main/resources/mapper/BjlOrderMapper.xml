@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjwap.dao.BjlOrderMapper">
+    <resultMap id="BaseResultMap" type="com.lontyu.dwjwap.entity.BjlOrder">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="vip_id" jdbcType="INTEGER" property="vipId"/>
+        <result column="periods" jdbcType="VARCHAR" property="periods"/>
+        <result column="buy_amount" jdbcType="NUMERIC" property="buyAmount"/>
+        <result column="support_win" jdbcType="INTEGER" property="supportWin"/>
+        <result column="selected_size" jdbcType="INTEGER" property="selectedSize"/>
+        <result column="video_serial" jdbcType="VARCHAR" property="videoSerial"/>
+        <result column="final_result" jdbcType="INTEGER" property="finalResult"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, vip_id, periods, buy_amount, support_win,selected_size,video_serial, final_result, add_time,remark
+  </sql>
+
+    <select id="getAmountByDate" parameterType="java.util.Map" resultMap="BaseResultMap">
+      select A.selected_size,A.buy_amount from bjl_order A
+      where A.support_win=#{supportWin,jdbcType=INTEGER}
+      AND DATE_FORMAT(A.add_time,'%Y-%m-%d')=#{currentDate,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectRecordsByResult" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_order
+        where final_result=#{sign,jdbcType=INTEGER} order by add_time asc
+    </select>
+
+    <select id="selectUserRecordsByResult" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_order
+        where
+        vip_id = #{userId}
+        <if test="sign != null">
+          and final_result=#{sign,jdbcType=INTEGER}
+        </if>
+    </select>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bjl_order
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.lontyu.dwjwap.entity.BjlOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into bjl_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="vipId != null">
+                vip_id,
+            </if>
+            <if test="periods != null">
+                periods,
+            </if>
+            <if test="buyAmount != null">
+                buy_amount,
+            </if>
+            <if test="supportWin != null">
+                support_win,
+            </if>
+            <if test="selectedSize != null">
+                selected_size,
+            </if>
+            <if test="videoSerial != null">
+                video_serial,
+            </if>
+            <if test="finalResult != null">
+                final_result,
+            </if>
+            <if test="addTime != null">
+                add_time,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="vipId != null">
+                #{vipId,jdbcType=INTEGER},
+            </if>
+            <if test="periods != null">
+                #{periods,jdbcType=VARCHAR},
+            </if>
+            <if test="buyAmount != null">
+                #{buyAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="supportWin != null">
+                #{supportWin,jdbcType=INTEGER},
+            </if>
+            <if test="selectedSize != null">
+                #{selectedSize,jdbcType=INTEGER},
+            </if>
+            <if test="videoSerial != null">
+                #{videoSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="finalResult != null">
+                #{finalResult,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                #{remark,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateOrderStatus" parameterType="java.util.Map">
+        update bjl_order set final_result=#{sign,jdbcType=INTEGER} where id= #{id,jdbcType=INTEGER}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjwap.entity.BjlOrder">
+        update bjl_order
+        <set>
+            <if test="vipId != null">
+                vip_id = #{vipId,jdbcType=INTEGER},
+            </if>
+            <if test="periods != null">
+                periods = #{periods,jdbcType=VARCHAR},
+            </if>
+            <if test="buyAmount != null">
+                buy_amount = #{buyAmount,jdbcType=DECIMAL},
+            </if>
+            <if test="supportWin != null">
+                support_win = #{supportWin,jdbcType=INTEGER},
+            </if>
+            <if test="selectedSize != null">
+                selected_size = #{selectedSize,jdbcType=INTEGER},
+            </if>
+            <if test="videoSerial != null">
+                video_serial = #{videoSerial,jdbcType=VARCHAR},
+            </if>
+            <if test="finalResult != null">
+                final_result = #{finalResult,jdbcType=INTEGER},
+            </if>
+            <if test="addTime != null">
+                add_time = #{addTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <select id="getOrderByUserIdAndPeroid"  resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_order o
+        where o.vip_id = #{vipId,jdbcType=INTEGER} and o.periods=#{peroid,jdbcType=VARCHAR}
+    </select>
+    <select id="getSupportList" resultMap="BaseResultMap">
+        select A.selected_size,A.buy_amount from bjl_order A
+        where A.support_win=#{supportWin,jdbcType=INTEGER} and periods=#{periods,jdbcType=VARCHAR}
+    </select>
+    <select id="selectPageList" parameterType="com.lontyu.dwjwap.dto.req.GetBetRecordsReqVO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from bjl_order
+        where 1=1
+        <include refid="Page_Where"/>
+        order by add_time desc
+        limit #{offset}, #{pageSize}
+    </select>
+    <select id="selectPageCount" parameterType="com.lontyu.dwjwap.dto.req.GetBetRecordsReqVO" resultType="java.lang.Integer">
+        select count(1) from bjl_order
+        where 1=1
+        <include refid="Page_Where"/>
+    </select>
+    <sql id="Page_Where">
+        <if test="vipId != null">
+            and vip_id = #{vipId}
+        </if>
+        <if test="startTime != null">
+            and add_time &gt;= #{startTime}
+        </if>
+        <if test="endTime != null">
+            and add_time &lt; #{endTime}
+        </if>
+    </sql>
+    <select id="selectBuyAmountByPeriod" resultMap="BaseResultMap">
+        SELECT
+            t.selected_size,
+            ifnull(sum(t.buy_amount),0) as buy_amount
+        FROM
+            bjl_order t
+        WHERE t.periods = #{periods}
+        GROUP BY t.selected_size
+    </select>
+</mapper>

@@ -1,0 +1,81 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dwj2?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: As_123456
+    initial-size: 10
+    max-active: 100
+    min-idle: 10
+    max-wait: 60000
+    pool-prepared-statements: true
+    max-pool-prepared-statement-per-connection-size: 20
+    time-between-eviction-runs-millis: 60000
+    min-evictable-idle-time-millis: 300000
+    alidation-query: SELECT 1 FROM DUAL
+    test-while-idle: true
+    test-on-borrow: false
+    test-on-return: false
+    stat-view-servlet:
+      enabled: true
+      url-pattern: /druid/*
+      #login-username: admin
+      #login-password: admin
+    filter:
+      stat:
+        log-slow-sql: true
+        slow-sql-millis: 1000
+        merge-sql: false
+      wall:
+        config:
+          multi-statement-allow: true
+
+## redis 相关
+redis:
+  host: localhost
+  port: 6379
+  password:
+  timeout: 10000
+  maxIdle: 300
+  maxTotal: 1000
+  maxWaitMillis: -1
+  minEvictableIdleTimeMillis: 300000
+  numTestsPerEvictionRun: 1024
+  timeBetweenEvictionRunsMillis: 30000
+  testOnBorrow: true
+  testWhileIdle: true
+
+## 微信支付 商户信息
+weixin:
+  defaultConfigId: 1 # 公众号默认配置id
+  appId: wxb6e4d54bb00582c0   #公众账号ID
+  mchId: 1385270202  #商户号
+  authToken: mzmzo  # 访问token
+  key: abcdefghijk1234567890abcdefghijk # 微信支付密钥
+  replyContent: 欢迎关注，更多功能开发中...
+  subscrbeContent: "欢迎关注，热门游戏微信访问：http://w8e33u.natappfree.cc"
+  pay:
+    productDesc: 电子产品-Iphone X
+    productDetail: Iphone X 手机热销中...
+
+logging:
+  file: C:\Users\as\Documents\logs  # 上线记得修改成 /data/logs 目录
+
+## cookie 加密秘钥
+cookie:
+  secretkey: ~#@^&dawanjia*%#wap#123!
+
+dwj:
+  domain: localhost:8081
+  promotionApi: http://localhost:8686/promotion/getUrl?flag=wls&inviterId=
+
+socketio:
+  server: localhost
+  port: 9092
+
+file:
+  upload:
+    uploadDir: "C:/Users/as/Pictures/upload/"
+    qrcodePath: "userQrcode"
+    downPath: "http://localhost:8081/fileStorage/"

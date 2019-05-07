@@ -1,0 +1,113 @@
+#set($title = "用户中心")
+
+#extends("page/layouts/main.vm")
+
+#block("head_meta")
+<script>/**
+ * YDUI 可伸缩布局方案
+ * rem计算方式：设计图尺寸px / 100 = 实际rem  例: 100px = 1rem
+ */
+!function (window) {
+
+    /* 设计图文档宽度 */
+    var docWidth = 750;
+
+    var doc = window.document,
+        docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+
+    var recalc = (function refreshRem () {
+        var clientWidth = docEl.getBoundingClientRect().width;
+
+        /* 8.55：小于320px不再缩小，11.2：大于420px不再放大 */
+        docEl.style.fontSize = Math.max(Math.min(20 * (clientWidth / docWidth), 11.2), 8.55) * 5 + 'px';
+
+        return refreshRem;
+    })();
+
+    /* 添加倍屏标识，安卓倍屏为1 */
+    docEl.setAttribute('data-dpr', window.navigator.appVersion.match(/iphone/gi) ? window.devicePixelRatio : 1);
+
+    if (/iP(hone|od|ad)/.test(window.navigator.userAgent)) {
+        /* 添加IOS标识 */
+        doc.documentElement.classList.add('ios');
+        /* IOS8以上给html添加hairline样式，以便特殊处理 */
+        if (parseInt(window.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8)
+            doc.documentElement.classList.add('hairline');
+    }
+
+    if (!doc.addEventListener) return;
+    window.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+
+}(window);
+</script>
+<link rel="stylesheet" type="text/css" href="//mobile.xiaobaii.com/roncoo-h5/static/css/page/demo_49a5b2e.css">
+#end
+
+#block("body")
+
+<section class="g-flexview">
+	<!--header-->
+	<header class="m-navbar index-header">
+		<a href="javascript:;" id="nav-back" class="navbar-item"><i class="back-ico"></i></a>
+		<div class="navbar-center"><span class="navbar-title">充值</span></div>
+	</header>
+
+	<div class="g-scrollview" style="padding-bottom: 1rem">
+		<div class="container-top-up discover-txt">
+      <div class="user-bar">
+        
+      </div>
+      <div class="field-label">
+        <label>请选择金豆数量：</label>
+        <!--<input id="money-total" type="name" class="field-input" value="50" />-->
+      </div>
+      <div class="count-list">
+        <a href="javascript:" data-count="50">50金豆</a>
+        <a href="javascript:" class="active" data-count="100">100金豆</a>
+        <a href="javascript:" data-count="200">200金豆</a>
+      </div>
+      <div class="count-list">
+        <a href="javascript:" data-count="500">500金豆</a>
+        <a href="javascript:" data-count="1000">1000金豆</a>
+        <a href="javascript:" data-count="2000">2000金豆</a>
+      </div>
+      <div class="pay-list">
+        <div class="hd">请选择支付方式：</div>
+        <div class="hc">
+          <a href="javascript:" class="active"><i class="icon-pay-weixin"></i>微信</a>
+          <a href="javascript:" class=""><i class="icon-pay-alipay"></i>支付宝</a>
+          <a href="javascript:" class=""><i class="icon-pay-ka"></i>银行转账</a>
+          <a href="javascript:" class=""><i class="icon-pay-qq"></i>QQ</a>
+          <a href="javascript:" class=""><i class="icon-pay-yinlian"></i>在线银行</a>
+        </div>
+      </div>
+      <div class="content-section">
+        <p class="text-gray">微信支付 - 安全快捷 - 大额无忧。</p>
+        <p class="text-gray">点击下一步，完成微信支付购买金豆。</p>
+      </div>
+			<a class="btn-block btn-primary btn" href="/ucenter/pay?amount=100">下一步</a>
+    </div>
+	</div>
+	#parse("../pages/common/_nav.vm")
+</section>
+<script type="text/template" id="tmplUser">
+  <div class="user-col">
+    <img src="<%=headImg%>" class="user-avatar">
+    <div class="user-name"><%=nickName%>
+    <% if(isVip) {%>
+      <span class="vip">会员</span>
+    <% } %>
+    </div>
+    <div class="user-id">ID：<%=id%></div>
+  </div>
+  <div class="user-col user-money">金豆：<%=amount%></div>
+</script>
+#parse("../pages/common/_script.vm")
+<script src="//mobile.xiaobaii.com/roncoo-h5/static/js/page/top-up_d53e743.js"></script>
+#end
+
+  ## auto inject by fis3-preprocess-extlang
+  #require("page/pages/top-up/index.vm")
+#end

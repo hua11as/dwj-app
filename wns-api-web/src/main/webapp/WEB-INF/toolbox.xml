@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    <tool>
+        <scope>application</scope>
+        <key>esc</key>
+        <class>org.apache.velocity.tools.generic.EscapeTool</class>
+    </tool>
+    <tool>
+        <scope>application</scope>
+        <key>render</key>
+        <class>org.apache.velocity.tools.generic.RenderTool</class>
+    </tool>
+    <tool>
+        <scope>application</scope>
+        <key>link</key>
+        <class>org.apache.velocity.tools.generic.LinkTool</class>
+    </tool>
+    <tool>
+        <scope>application</scope>
+        <key>context</key>
+        <class>org.apache.velocity.tools.generic.ContextTool</class>
+    </tool>
+    <tool>
+        <scope>application</scope>
+        <key>jello</key>
+        <class>com.baidu.fis.velocity.tools.JelloTool</class>
+    </tool>
+    <tool>
+        <scope>application</scope>
+        <key>date</key>
+        <class>org.apache.velocity.tools.generic.DateTool</class>
+    </tool>
+</toolbox>

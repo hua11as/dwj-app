@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lontyu.dwjadmin.dao.BjlOpenprizeVideoMapper">
+  <resultMap id="BaseResultMap" type="com.lontyu.dwjadmin.entity.BjlOpenprizeVideo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="total_play_times" jdbcType="INTEGER" property="totalPlayTimes" />
+    <result column="result_sign" jdbcType="INTEGER" property="resultSign" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="player_point" jdbcType="VARCHAR" property="playerPoint" />
+    <result column="banker_point" jdbcType="VARCHAR" property="bankerPoint" />
+    <result column="link_adress" jdbcType="VARCHAR" property="linkAdress" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="order_times" jdbcType="INTEGER" property="orderTimes" />
+    <result column="cal_order_times" jdbcType="INTEGER" property="calOrderTimes" />
+    <result column="play_times" jdbcType="INTEGER" property="playTimes" />
+    <result column="show_result_times" jdbcType="INTEGER" property="showResultTimes" />
+    <result column="player_point_color" jdbcType="VARCHAR" property="playerPointColor" />
+    <result column="banker_point_color" jdbcType="VARCHAR" property="bankerPointColor" />
+    <result column="deinger_num" jdbcType="INTEGER" property="deingerNum" />
+    <result column="player_pair" jdbcType="INTEGER" property="playerPair" />
+    <result column="banker_pair" jdbcType="INTEGER" property="bankerPair" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, total_play_times, result_sign, status, player_point, banker_point, link_adress, 
+    add_time, remark, order_times, cal_order_times, play_times, show_result_times,player_point_color,
+    banker_point_color,deinger_num,player_pair,banker_pair
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bjl_openprize_video
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from bjl_openprize_video
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.lontyu.dwjadmin.entity.BjlOpenprizeVideo">
+    insert into bjl_openprize_video (id, total_play_times, result_sign, 
+      status, player_point, banker_point, 
+      link_adress, add_time, remark, 
+      order_times, cal_order_times, play_times, 
+      show_result_times,player_point_color,banker_point_color,deinger_num,player_pair,banker_pair)
+    values (#{id,jdbcType=INTEGER}, #{totalPlayTimes,jdbcType=INTEGER}, #{resultSign,jdbcType=INTEGER}, 
+      #{status,jdbcType=INTEGER}, #{playerPoint,jdbcType=VARCHAR}, #{bankerPoint,jdbcType=VARCHAR}, 
+      #{linkAdress,jdbcType=VARCHAR}, #{addTime,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}, 
+      #{orderTimes,jdbcType=INTEGER}, #{calOrderTimes,jdbcType=INTEGER}, #{playTimes,jdbcType=INTEGER}, 
+      #{showResultTimes,jdbcType=INTEGER},#{playerPointColor,jdbcType=VARCHAR}, #{bankerPointColor,jdbcType=VARCHAR},
+      #{deingerNum,jdbcType=INTEGER},#{playerPair,jdbcType=INTEGER},#{bankerPair,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.lontyu.dwjadmin.entity.BjlOpenprizeVideo">
+    insert into bjl_openprize_video
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="totalPlayTimes != null">
+        total_play_times,
+      </if>
+      <if test="resultSign != null">
+        result_sign,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="playerPoint != null">
+        player_point,
+      </if>
+      <if test="bankerPoint != null">
+        banker_point,
+      </if>
+      <if test="linkAdress != null">
+        link_adress,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="orderTimes != null">
+        order_times,
+      </if>
+      <if test="calOrderTimes != null">
+        cal_order_times,
+      </if>
+      <if test="playTimes != null">
+        play_times,
+      </if>
+      <if test="showResultTimes != null">
+        show_result_times,
+      </if>
+      <if test="playerPointColor != null">
+        player_point_color,
+      </if>
+      <if test="bankerPointColor != null">
+        banker_point_color,
+      </if>
+      <if test="deingerNum != null">
+        deinger_num,
+      </if>
+      <if test="playerPair != null">
+        player_pair,
+      </if>
+      <if test="bankerPair != null">
+        banker_pair,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="totalPlayTimes != null">
+        #{totalPlayTimes,jdbcType=INTEGER},
+      </if>
+      <if test="resultSign != null">
+        #{resultSign,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playerPoint != null">
+        #{playerPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="bankerPoint != null">
+        #{bankerPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAdress != null">
+        #{linkAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTimes != null">
+        #{orderTimes,jdbcType=INTEGER},
+      </if>
+      <if test="calOrderTimes != null">
+        #{calOrderTimes,jdbcType=INTEGER},
+      </if>
+      <if test="playTimes != null">
+        #{playTimes,jdbcType=INTEGER},
+      </if>
+      <if test="showResultTimes != null">
+        #{showResultTimes,jdbcType=INTEGER},
+      </if>
+      <if test="playerPointColor != null">
+        #{playerPointColor,jdbcType=VARCHAR},
+      </if>
+      <if test="bankerPointColor != null">
+        #{bankerPointColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deingerNum != null">
+        #{deingerNum,jdbcType=INTEGER},
+      </if>
+      <if test="playerPair != null">
+        #{playerPair,jdbcType=INTEGER},
+      </if>
+      <if test="bankerPair != null">
+        #{bankerPair,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lontyu.dwjadmin.entity.BjlOpenprizeVideo">
+    update bjl_openprize_video
+    <set>
+      <if test="totalPlayTimes != null">
+        total_play_times = #{totalPlayTimes,jdbcType=INTEGER},
+      </if>
+      <if test="resultSign != null">
+        result_sign = #{resultSign,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="playerPoint != null">
+        player_point = #{playerPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="bankerPoint != null">
+        banker_point = #{bankerPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="linkAdress != null">
+        link_adress = #{linkAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderTimes != null">
+        order_times = #{orderTimes,jdbcType=INTEGER},
+      </if>
+      <if test="calOrderTimes != null">
+        cal_order_times = #{calOrderTimes,jdbcType=INTEGER},
+      </if>
+      <if test="playTimes != null">
+        play_times = #{playTimes,jdbcType=INTEGER},
+      </if>
+      <if test="showResultTimes != null">
+        show_result_times = #{showResultTimes,jdbcType=INTEGER},
+      </if>
+      <if test="playerPointColor != null">
+        player_point_color = #{playerPointColor,jdbcType=VARCHAR},
+      </if>
+      <if test="bankerPointColor != null">
+        banker_point_color = #{bankerPointColor,jdbcType=VARCHAR},
+      </if>
+      <if test="deingerNum != null">
+        deinger_num = #{deingerNum, jdbcType=INTEGER},
+      </if>
+      <if test="playerPair != null">
+        deinger_num = #{playerPair, jdbcType=INTEGER},
+      </if>
+      <if test="bankerPair != null">
+        banker_pair = #{bankerPair, jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lontyu.dwjadmin.entity.BjlOpenprizeVideo">
+    update bjl_openprize_video
+    set total_play_times = #{totalPlayTimes,jdbcType=INTEGER},
+      result_sign = #{resultSign,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      player_point = #{playerPoint,jdbcType=VARCHAR},
+      banker_point = #{bankerPoint,jdbcType=VARCHAR},
+      link_adress = #{linkAdress,jdbcType=VARCHAR},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      remark = #{remark,jdbcType=VARCHAR},
+      order_times = #{orderTimes,jdbcType=INTEGER},
+      cal_order_times = #{calOrderTimes,jdbcType=INTEGER},
+      play_times = #{playTimes,jdbcType=INTEGER},
+      show_result_times = #{showResultTimes,jdbcType=INTEGER},
+      player_point_color = #{playerPointColor,jdbcType=VARCHAR},
+      banker_point_color = #{bankerPointColor,jdbcType=VARCHAR},
+      deinger_num = #{deingerNum,jdbcType=INTEGER},
+      player_pair = #{playerPair,jdbcType=INTEGER},
+      banker_pair = #{bankerPair,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectRandomVideo" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from bjl_openprize_video v
+    where v.`result_sign`=#{resultSign,jdbcType=INTEGER} ORDER BY RAND() LIMIT 1;
+  </select>
+</mapper>
