@@ -1,6 +1,14 @@
 package com.dwj.app.support.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.http.client.ClientHttpResponse;
@@ -28,7 +36,7 @@ public class ThirdWithdrawUtils {
     public static String thirdWithdrawTest() {
         String source = "https://www.baidu.com";
         Map<String, Object> postData = new HashMap<>(10);
-        postData.put("mid", "1328");
+//        postData.put("mid", "1328");
         postData.put("jine", "1");
         postData.put("openid", "oFl4V07FQx3itqKjwvmTI-HstEHA");
         postData.put("tixianid", "10000000000");
@@ -41,25 +49,17 @@ public class ThirdWithdrawUtils {
         try {
             URI uri = new URI("http://jfcms12.com/jieru.php");
 
-            SimpleClientHttpRequestFactory schr = new SimpleClientHttpRequestFactory();
-
-            ClientHttpRequest chr = schr.createRequest(uri, HttpMethod.POST);
-            ObjectMapper mapper = new ObjectMapper();
-            chr.getBody().write(mapper.writeValueAsString(postData).getBytes());
-
-            ClientHttpResponse res = chr.execute();
-
-            InputStream is = res.getBody();
-
-            InputStreamReader isr = new InputStreamReader(is);
-            BufferedReader br = new BufferedReader(isr);
-
-            while ((str = br.readLine()) != null) {
-                System.out.println(str);
-                System.out.println(unicodeToString(str));
-            }
-
-        } catch (URISyntaxException | IOException e1) {
+            CloseableHttpClient httpclient = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost(uri);
+//            httpPost.setHeader("content-type", ContentType.MULTIPART_FORM_DATA.getMimeType());
+//            ObjectMapper objectMapper = new ObjectMapper();
+//            HttpEntity entity = new StringEntity(objectMapper.writeValueAsString(postData), "UTF-8");
+//            httpPost.setEntity(entity);
+            CloseableHttpResponse response = httpclient.execute(httpPost);
+            str = EntityUtils.toString(response.getEntity(), "utf-8");
+            System.out.println(str);
+            System.out.println(unicodeToString(str));
+        } catch (Exception e1) {
             // TODO Auto-generated catch block
             e1.printStackTrace();
         }
@@ -67,8 +67,10 @@ public class ThirdWithdrawUtils {
         return str;
     }
 
+    private static Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+
     public static String unicodeToString(String str) {
-        Pattern pattern = Pattern.compile("(\\\\u(\\p{XDigit}{4}))");
+
         Matcher matcher = pattern.matcher(str);
         char ch;
         while (matcher.find()) {
@@ -81,5 +83,10 @@ public class ThirdWithdrawUtils {
             str = str.replace(group1, ch + "");
         }
         return str;
+    }
+
+    public static void main(String[] args) {
+        thirdWithdrawTest();
+//        System.out.println(ContentType.MULTIPART_FORM_DATA.getMimeType());
     }
 }

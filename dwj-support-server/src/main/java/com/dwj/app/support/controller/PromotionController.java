@@ -27,7 +27,7 @@ public class PromotionController {
 
     private String getPromotionUrl(String flag, Integer inviterId) {
         Map<String, String> urlMap = new HashMap<>(5);
-        urlMap.put("dwj", "http://mobile.lroqx.cn");
+        urlMap.put("dwj", "http://dwj01.bsgbwl.com");
         urlMap.put("wls", "http://play.i0jc9.cn");
 
         return Optional.ofNullable(urlMap.get(flag)).orElse(urlMap.get("dwj")) + "?inviterId=" + inviterId;
